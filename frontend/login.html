@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Saathi | Login</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="auth-page">
+
+    <!-- LEFT SIDE -->
+
+    <div class="brand-section">
+
+      <div class="logo">
+        <span>✦</span> Saathi
+      </div>
+
+      <h1>
+        Your Safety.<br>
+        <span>Your Saathi.</span>
+      </h1>
+
+      <p>
+        A smart safety companion designed to
+        keep you connected, protected and cared for.
+      </p>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">
+          🛡️
+        </div>
+
+        <div>
+          <h3>Always There</h3>
+
+          <p>
+            Smart protection when you need it.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="form-section">
+
+      <div class="form-container">
+
+        <p class="small-heading" id="small-heading">
+          WELCOME BACK
+        </p>
+
+        <h2 id="form-title">
+          Login to Saathi
+        </h2>
+
+        <p class="form-description" id="form-description">
+          Enter your details to continue.
+        </p>
+
+
+        <!-- NAME -->
+
+        <div class="input-group hidden" id="name-group">
+
+          <label>Full Name</label>
+
+          <input type="text" id="name" placeholder="Enter your full name">
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="input-group">
+
+          <label>Email Address</label>
+
+          <input type="email" id="email" placeholder="Enter your email">
+
+        </div>
+
+
+        <!-- PHONE -->
+
+        <div class="input-group hidden" id="phone-group">
+
+          <label>Phone Number</label>
+
+          <input type="tel" id="phone" placeholder="Enter your phone number">
+
+        </div>
+
+
+        <!-- AGE -->
+
+        <div class="input-group hidden" id="age-group">
+
+          <label>Age</label>
+
+          <input type="number" id="age" placeholder="Enter your age">
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+          <label>Password</label>
+
+          <input type="password" id="password" placeholder="Enter your password">
+
+        </div>
+
+
+        <!-- BUTTON -->
+
+        <button class="primary-button" onclick="handleAuth()">
+
+          <span id="button-text">
+            Login
+          </span>
+
+          <span>→</span>
+
+        </button>
+
+
+        <!-- MESSAGE -->
+
+        <p id="message"></p>
+
+
+        <!-- SWITCH -->
+
+        <div class="switch-account">
+
+          <span id="switch-text">
+            Don't have an account?
+          </span>
+
+          <button onclick="toggleForm()" id="switch-button">
+            Create Account
+          </button>
+
+        </div>
+
+
+        <div class="security-note">
+          🔒 Your information stays secure.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

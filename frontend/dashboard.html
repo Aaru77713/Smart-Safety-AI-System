@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Saathi - Smart Safety Companion</title>
+
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="dashboard.css"
+    >
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Leaflet JS -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+</head>
+
+
+<body>
+
+
+<!-- ===================================== -->
+<!-- SIDEBAR -->
+<!-- ===================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            💜
+        </div>
+
+        <div>
+            <h2>Saathi</h2>
+
+            <p
+                data-en="Smart Safety Companion"
+                data-hi="स्मार्ट सुरक्षा साथी"
+            >
+                Smart Safety Companion
+            </p>
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a
+            href="#"
+            class="active"
+            onclick="showDashboard(); return false;"
+        >
+            <span>🏠</span>
+
+            <span
+                data-en="Dashboard"
+                data-hi="डैशबोर्ड"
+            >
+                Dashboard
+            </span>
+        </a>
+
+
+        <a
+            href="#"
+            onclick="openEmergencyPanel(); return false;"
+        >
+            <span>🚨</span>
+
+            <span
+                data-en="Emergency"
+                data-hi="आपातकाल"
+            >
+                Emergency
+            </span>
+        </a>
+
+
+        <a
+    href="#"
+    onclick="openDigitalTwinPanel(); return false;"
+>
+            <span>🧠</span>
+
+            <span
+                data-en="Digital Twin"
+                data-hi="डिजिटल ट्विन"
+            >
+                Digital Twin
+            </span>
+        </a>
+
+
+        <a
+            href="#"
+            onclick="openChatbot(); return false;"
+        >
+            <span>🤖</span>
+
+            <span
+                data-en="AI Assistant"
+                data-hi="AI सहायक"
+            >
+                AI Assistant
+            </span>
+        </a>
+
+
+        <a
+            href="#"
+            onclick="openLocationPanel(); return false;"
+        >
+            <span>📍</span>
+
+            <span
+                data-en="Location"
+                data-hi="स्थान"
+            >
+                Location
+            </span>
+        </a>
+
+
+        <a
+            href="#"
+            onclick="openAlertsPanel(); return false;"
+        >
+            <span>🔔</span>
+
+            <span
+                data-en="Alerts"
+                data-hi="अलर्ट"
+            >
+                Alerts
+            </span>
+        </a>
+
+
+        <a
+            href="#"
+            onclick="openFamilyPanel(); return false;"
+        >
+            <span>👨‍👩‍👧</span>
+
+            <span
+                data-en="Family"
+                data-hi="परिवार"
+            >
+                Family
+            </span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <button
+            class="logout-button"
+            onclick="logout()"
+        >
+            <span>↪</span>
+
+            <span
+                data-en="Logout"
+                data-hi="लॉग आउट"
+            >
+                Logout
+            </span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ===================================== -->
+<!-- MAIN DASHBOARD -->
+<!-- ===================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <p
+                class="welcome-text"
+                data-en="WELCOME BACK"
+                data-hi="वापसी पर स्वागत है"
+            >
+                WELCOME BACK
+            </p>
+
+            <h1>
+                <span
+                    data-en="Hello,"
+                    data-hi="नमस्ते,"
+                >
+                    Hello,
+                </span>
+
+                <span id="user-name">
+                    User
+                </span>
+            </h1>
+
+        </div>
+
+
+        <div class="top-actions">
+
+            <!-- LANGUAGE -->
+
+            <button
+                id="language-button"
+                class="top-button"
+                onclick="changeLanguage()"
+            >
+                EN / हिंदी
+            </button>
+
+
+            <!-- THEME -->
+
+            <button
+                id="theme-button"
+                class="top-button theme-button"
+                onclick="toggleTheme()"
+            >
+                ☀️
+            </button>
+
+
+            <!-- PROFILE -->
+
+            <div class="profile-circle">
+                U
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================================= -->
+    <!-- SAFETY HERO -->
+    <!-- ================================= -->
+
+    <section class="safety-hero">
+
+        <div class="safe-content">
+
+            <div class="safe-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <p
+                    data-en="CURRENT SAFETY STATUS"
+                    data-hi="वर्तमान सुरक्षा स्थिति"
+                >
+                    CURRENT SAFETY STATUS
+                </p>
+
+                <h2
+                    data-en="You're Safe"
+                    data-hi="आप सुरक्षित हैं"
+                >
+                    You're Safe
+                </h2>
+
+                <span
+                    data-en="Saathi is ready to assist you."
+                    data-hi="साथी आपकी सहायता के लिए तैयार है।"
+                >
+                    Saathi is ready to assist you.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-sos">
+
+            <p
+                data-en="NEED HELP?"
+                data-hi="मदद चाहिए?"
+            >
+                NEED HELP?
+            </p>
+
+            <button
+                class="main-sos-button"
+                onclick="sendSOS()"
+            >
+                SOS
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================= -->
+    <!-- QUICK ACTIONS -->
+    <!-- ================================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p
+                    data-en="SAFETY SERVICES"
+                    data-hi="सुरक्षा सेवाएँ"
+                >
+                    SAFETY SERVICES
+                </p>
+
+                <h2
+                    data-en="Quick Actions"
+                    data-hi="त्वरित कार्य"
+                >
+                    Quick Actions
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <!-- FALL DETECTION -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🚶
+                </div>
+
+                <h3
+                    data-en="Fall Detection"
+                    data-hi="गिरने की पहचान"
+                >
+                    Fall Detection
+                </h3>
+
+                <p
+                    data-en="Test the emergency response using simulated fall detection."
+                    data-hi="सिम्युलेटेड फॉल डिटेक्शन से आपातकालीन प्रतिक्रिया का परीक्षण करें।"
+                >
+                    Test the emergency response using simulated fall detection.
+                </p>
+
+                <button
+                    onclick="simulateFall()"
+                    data-en="Simulate Fall →"
+                    data-hi="गिरने का परीक्षण करें →"
+                >
+                    Simulate Fall →
+                </button>
+
+            </div>
+
+
+
+            <!-- LOCATION -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📍
+                </div>
+
+                <h3
+                    data-en="Live Location"
+                    data-hi="लाइव स्थान"
+                >
+                    Live Location
+                </h3>
+
+                <p
+                    data-en="View your current location for emergency assistance."
+                    data-hi="आपातकालीन सहायता के लिए अपना वर्तमान स्थान देखें।"
+                >
+                    View your current location for emergency assistance.
+                </p>
+
+                <button
+                    onclick="openLocationPanel()"
+                    data-en="View Location →"
+                    data-hi="स्थान देखें →"
+                >
+                    View Location →
+                </button>
+
+            </div>
+
+
+
+            <!-- FAMILY -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👨‍👩‍👧
+                </div>
+
+                <h3
+                    data-en="Emergency Contacts"
+                    data-hi="आपातकालीन संपर्क"
+                >
+                    Emergency Contacts
+                </h3>
+
+                <p
+                    data-en="Manage trusted contacts for emergency situations."
+                    data-hi="आपातकालीन स्थिति के लिए विश्वसनीय संपर्क प्रबंधित करें।"
+                >
+                    Manage trusted contacts for emergency situations.
+                </p>
+
+                <button
+                    onclick="openFamilyPanel()"
+                    data-en="Manage Contacts →"
+                    data-hi="संपर्क प्रबंधित करें →"
+                >
+                    Manage Contacts →
+                </button>
+
+            </div>
+
+
+
+            <!-- ALERTS -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔔
+                </div>
+
+                <h3
+                    data-en="Emergency History"
+                    data-hi="आपातकालीन इतिहास"
+                >
+                    Emergency History
+                </h3>
+
+                <p
+                    data-en="View previous SOS and emergency events."
+                    data-hi="पिछले SOS और आपातकालीन घटनाएँ देखें।"
+                >
+                    View previous SOS and emergency events.
+                </p>
+
+                <button
+                    onclick="openAlertsPanel()"
+                    data-en="View History →"
+                    data-hi="इतिहास देखें →"
+                >
+                    View History →
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================= -->
+    <!-- USER PROFILE -->
+    <!-- ================================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p
+                    data-en="YOUR ACCOUNT"
+                    data-hi="आपका खाता"
+                >
+                    YOUR ACCOUNT
+                </p>
+
+                <h2
+                    data-en="Profile"
+                    data-hi="प्रोफ़ाइल"
+                >
+                    Profile
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <div class="profile-item">
+
+                <span
+                    data-en="Name"
+                    data-hi="नाम"
+                >
+                    Name
+                </span>
+
+                <strong id="profile-name">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span
+                    data-en="Email"
+                    data-hi="ईमेल"
+                >
+                    Email
+                </span>
+
+                <strong id="profile-email">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span
+                    data-en="Phone"
+                    data-hi="फ़ोन"
+                >
+                    Phone
+                </span>
+
+                <strong id="profile-phone">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span
+                    data-en="Age"
+                    data-hi="आयु"
+                >
+                    Age
+                </span>
+
+                <strong id="profile-age">
+                    --
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- ================================================= -->
+<!-- EMERGENCY CONFIRMATION POPUP -->
+<!-- ================================================= -->
+
+<div
+    id="emergency-popup"
+    class="emergency-popup"
+>
+
+    <div class="emergency-popup-box">
+
+        <div class="emergency-popup-icon">
+            🚨
+        </div>
+
+        <h2 id="emergency-title">
+            Emergency Detected!
+        </h2>
+
+        <h3
+            data-en="Are you okay?"
+            data-hi="क्या आप ठीक हैं?"
+        >
+            Are you okay?
+        </h3>
+
+        <p
+            data-en="If you don't respond within 10 seconds, your emergency contacts will be contacted automatically."
+            data-hi="यदि आप 10 सेकंड के अंदर जवाब नहीं देते हैं, तो आपके आपातकालीन संपर्कों से स्वतः संपर्क किया जाएगा।"
+        >
+            If you don't respond within 10 seconds,
+            your emergency contacts will be contacted automatically.
+        </p>
+
+        <div id="countdown">
+            10
+        </div>
+
+        <p
+            class="timer-text"
+            data-en="seconds remaining"
+            data-hi="सेकंड शेष"
+        >
+            seconds remaining
+        </p>
+
+
+        <button
+            class="safe-button"
+            onclick="userIsOkay()"
+            data-en="✓ Yes, I'm Okay"
+            data-hi="✓ हाँ, मैं ठीक हूँ"
+        >
+            ✓ Yes, I'm Okay
+        </button>
+
+
+        <button
+            class="call-button"
+            onclick="callEmergencyContacts()"
+            data-en="📞 Call Emergency Contacts"
+            data-hi="📞 आपातकालीन संपर्कों को कॉल करें"
+        >
+            📞 Call Emergency Contacts
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- FAMILY PANEL -->
+<!-- ================================================= -->
+
+<div
+    id="family-panel"
+    class="side-panel"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <p
+                data-en="SAATHI FAMILY"
+                data-hi="साथी परिवार"
+            >
+                SAATHI FAMILY
+            </p>
+
+            <h2
+                data-en="Family & Emergency Contacts"
+                data-hi="परिवार और आपातकालीन संपर्क"
+            >
+                Family & Emergency Contacts
+            </h2>
+
+        </div>
+
+
+        <button onclick="closeFamilyPanel()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="panel-content">
+
+
+        <div
+            class="empty-state"
+            id="family-empty"
+        >
+
+            <div class="empty-icon">
+                👨‍👩‍👧
+            </div>
+
+            <h3
+                data-en="No Emergency Contacts"
+                data-hi="कोई आपातकालीन संपर्क नहीं"
+            >
+                No Emergency Contacts
+            </h3>
+
+            <p
+                data-en="Add trusted family members who should be contacted during an emergency."
+                data-hi="उन विश्वसनीय परिवार के सदस्यों को जोड़ें जिनसे आपातकाल में संपर्क किया जाना चाहिए।"
+            >
+                Add trusted family members who should be
+                contacted during an emergency.
+            </p>
+
+        </div>
+
+
+        <button
+            class="primary-panel-button"
+            onclick="showContactForm()"
+            data-en="+ Add Emergency Contact"
+            data-hi="+ आपातकालीन संपर्क जोड़ें"
+        >
+            + Add Emergency Contact
+        </button>
+
+
+
+        <!-- ADD CONTACT FORM -->
+
+        <div
+            id="contact-form"
+            class="contact-form"
+        >
+
+            <h3
+                data-en="Add Emergency Contact"
+                data-hi="आपातकालीन संपर्क जोड़ें"
+            >
+                Add Emergency Contact
+            </h3>
+
+
+            <label
+                data-en="Name"
+                data-hi="नाम"
+            >
+                Name
+            </label>
+
+            <input
+                type="text"
+                id="contact-name"
+                placeholder="Enter contact name"
+            >
+
+
+            <label
+                data-en="Phone Number"
+                data-hi="फ़ोन नंबर"
+            >
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="contact-phone"
+                placeholder="Enter phone number"
+            >
+
+
+            <label
+                data-en="Relation"
+                data-hi="रिश्ता"
+            >
+                Relation
+            </label>
+
+
+            <select id="contact-relation">
+
+                <option value="">
+                    Select Relation
+                </option>
+
+                <option value="Son">
+                    Son
+                </option>
+
+                <option value="Daughter">
+                    Daughter
+                </option>
+
+                <option value="Spouse">
+                    Spouse
+                </option>
+
+                <option value="Brother">
+                    Brother
+                </option>
+
+                <option value="Sister">
+                    Sister
+                </option>
+
+                <option value="Friend">
+                    Friend
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <div class="form-buttons">
+
+                <button
+                    class="secondary-button"
+                    onclick="hideContactForm()"
+                    data-en="Cancel"
+                    data-hi="रद्द करें"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    class="primary-button"
+                    onclick="saveEmergencyContact()"
+                    data-en="Save Contact"
+                    data-hi="संपर्क सेव करें"
+                >
+                    Save Contact
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- BACKEND CONTACTS -->
+
+        <div
+            id="contacts-list"
+            class="contacts-list"
+        >
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- LOCATION PANEL -->
+<!-- ================================================= -->
+
+<div
+    id="location-panel"
+    class="side-panel"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <p
+                data-en="SAATHI LOCATION"
+                data-hi="साथी स्थान"
+            >
+                SAATHI LOCATION
+            </p>
+
+            <h2
+                data-en="📍 Live Location"
+                data-hi="📍 लाइव स्थान"
+            >
+                📍 Live Location
+            </h2>
+
+        </div>
+
+
+        <button onclick="closeLocationPanel()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="panel-content">
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                📍
+            </div>
+
+            <div>
+
+                <p
+                    data-en="Current Location"
+                    data-hi="वर्तमान स्थान"
+                >
+                    Current Location
+                </p>
+
+                <h3 id="location-status">
+                    Location not loaded
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary-panel-button"
+            onclick="getCurrentLocation()"
+            data-en="📍 Get My Current Location"
+            data-hi="📍 मेरा वर्तमान स्थान प्राप्त करें"
+        >
+            📍 Get My Current Location
+        </button>
+
+
+        <div id="map"></div>
+
+
+        <div class="coordinate-grid">
+
+            <div>
+
+                <p
+                    data-en="Latitude"
+                    data-hi="अक्षांश"
+                >
+                    Latitude
+                </p>
+
+                <strong id="latitude">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <p
+                    data-en="Longitude"
+                    data-hi="देशांतर"
+                >
+                    Longitude
+                </p>
+
+                <strong id="longitude">
+                    --
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- ALERTS PANEL -->
+<!-- ================================================= -->
+
+<div
+    id="alerts-panel"
+    class="side-panel"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <p
+                data-en="SAATHI SAFETY"
+                data-hi="साथी सुरक्षा"
+            >
+                SAATHI SAFETY
+            </p>
+
+            <h2
+                data-en="🔔 Emergency History"
+                data-hi="🔔 आपातकालीन इतिहास"
+            >
+                🔔 Emergency History
+            </h2>
+
+        </div>
+
+
+        <button onclick="closeAlertsPanel()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="panel-content">
+
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <p
+                    data-en="Total Emergencies"
+                    data-hi="कुल आपातकाल"
+                >
+                    Total Emergencies
+                </p>
+
+                <h2 id="total-alerts">
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <p
+                    data-en="Active"
+                    data-hi="सक्रिय"
+                >
+                    Active
+                </p>
+
+                <h2 id="active-alerts">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="history-heading">
+
+            <div>
+
+                <p
+                    data-en="EMERGENCY LOG"
+                    data-hi="आपातकालीन रिकॉर्ड"
+                >
+                    EMERGENCY LOG
+                </p>
+
+                <h3
+                    data-en="Recent Alerts"
+                    data-hi="हाल के अलर्ट"
+                >
+                    Recent Alerts
+                </h3>
+
+            </div>
+
+
+            <button
+                onclick="loadSOSHistory()"
+                data-en="↻ Refresh"
+                data-hi="↻ रीफ़्रेश"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <div
+            id="alerts-empty"
+            class="empty-state"
+        >
+
+            <div class="empty-icon">
+                🛡️
+            </div>
+
+            <h3
+                data-en="No Emergency History"
+                data-hi="कोई आपातकालीन इतिहास नहीं"
+            >
+                No Emergency History
+            </h3>
+
+            <p
+                data-en="Your previous SOS and emergency events will appear here."
+                data-hi="आपके पिछले SOS और आपातकालीन घटनाएँ यहाँ दिखाई देंगी।"
+            >
+                Your previous SOS and emergency events
+                will appear here.
+            </p>
+
+        </div>
+
+
+        <div
+            id="alerts-list"
+            class="alerts-list"
+        >
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- EMERGENCY CENTER PANEL -->
+<!-- ================================================= -->
+
+<div
+    id="emergency-panel"
+    class="side-panel"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <p
+                class="danger-label"
+                data-en="SAATHI EMERGENCY CENTER"
+                data-hi="साथी आपातकालीन केंद्र"
+            >
+                SAATHI EMERGENCY CENTER
+            </p>
+
+            <h2
+                data-en="🚨 Emergency Center"
+                data-hi="🚨 आपातकालीन केंद्र"
+            >
+                🚨 Emergency Center
+            </h2>
+
+        </div>
+
+
+        <button onclick="closeEmergencyPanel()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="panel-content">
+
+
+        <div class="info-card">
+
+            <div class="safe-status-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <p
+                    data-en="Current Status"
+                    data-hi="वर्तमान स्थिति"
+                >
+                    Current Status
+                </p>
+
+                <h3
+                    class="safe-text"
+                    data-en="You are Safe"
+                    data-hi="आप सुरक्षित हैं"
+                >
+                    You are Safe
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SOS -->
+
+        <div class="emergency-action">
+
+            <div>
+
+                <p
+                    class="danger-label"
+                    data-en="MANUAL EMERGENCY"
+                    data-hi="मैनुअल आपातकाल"
+                >
+                    MANUAL EMERGENCY
+                </p>
+
+                <h3
+                    data-en="Emergency SOS"
+                    data-hi="आपातकालीन SOS"
+                >
+                    Emergency SOS
+                </h3>
+
+                <p
+                    data-en="Use SOS if you need immediate help."
+                    data-hi="यदि आपको तुरंत सहायता चाहिए तो SOS का उपयोग करें।"
+                >
+                    Use SOS if you need immediate help.
+                </p>
+
+            </div>
+
+
+            <button
+                class="small-sos-button"
+                onclick="sendSOS()"
+            >
+                SOS
+            </button>
+
+        </div>
+
+
+
+        <!-- FALL -->
+
+        <div class="emergency-action">
+
+            <div>
+
+                <p
+                    class="danger-label"
+                    data-en="DETECTION DEMO"
+                    data-hi="डिटेक्शन डेमो"
+                >
+                    DETECTION DEMO
+                </p>
+
+                <h3
+                    data-en="Fall Detection"
+                    data-hi="गिरने की पहचान"
+                >
+                    Fall Detection
+                </h3>
+
+                <p
+                    data-en="Test the emergency confirmation flow using simulated fall detection."
+                    data-hi="सिम्युलेटेड फॉल डिटेक्शन द्वारा आपातकालीन पुष्टि प्रक्रिया का परीक्षण करें।"
+                >
+                    Test the emergency confirmation flow
+                    using simulated fall detection.
+                </p>
+
+            </div>
+
+
+            <button
+                class="fall-button"
+                onclick="simulateFall()"
+                data-en="Simulate Fall"
+                data-hi="परीक्षण करें"
+            >
+                Simulate Fall
+            </button>
+
+        </div>
+
+
+
+        <!-- LOCATION -->
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                📍
+            </div>
+
+            <div>
+
+                <p
+                    data-en="Location Status"
+                    data-hi="स्थान स्थिति"
+                >
+                    Location Status
+                </p>
+
+                <h3 id="emergency-location-status">
+                    Not checked
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CONTACTS -->
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                👨‍👩‍👧
+            </div>
+
+            <div>
+
+                <p
+                    data-en="Emergency Contacts"
+                    data-hi="आपातकालीन संपर्क"
+                >
+                    Emergency Contacts
+                </p>
+
+                <h3
+                    data-en="Backend integration pending"
+                    data-hi="बैकएंड इंटीग्रेशन बाकी है"
+                >
+                    Backend integration pending
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="emergency-note">
+
+            <strong
+                data-en="How it works"
+                data-hi="यह कैसे काम करता है"
+            >
+                How it works
+            </strong>
+
+            <p
+                data-en="SOS or fall detection starts a 10-second confirmation. If there is no response, the emergency is automatically escalated."
+                data-hi="SOS या गिरने की पहचान के बाद 10 सेकंड की पुष्टि शुरू होती है। कोई प्रतिक्रिया न मिलने पर आपातकाल स्वतः आगे बढ़ाया जाता है।"
+            >
+                SOS or fall detection starts a 10-second
+                confirmation. If there is no response,
+                the emergency is automatically escalated.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- FLOATING SAATHI AI BUTTON -->
+<!-- ================================================= -->
+
+<button
+    id="saathi-ai-button"
+    class="saathi-ai-button"
+    onclick="toggleChatbot()"
+    title="Saathi AI"
+>
+    🤖
+</button>
+
+
+
+<!-- ================================================= -->
+<!-- SAATHI AI CHATBOT -->
+<!-- ================================================= -->
+
+<div
+    id="chatbot-container"
+    class="chatbot-container"
+>
+
+    <div class="chatbot-header">
+
+        <div class="chatbot-title">
+
+            <div class="chatbot-avatar">
+                🤖
+            </div>
+
+            <div>
+
+                <h3>Saathi AI</h3>
+
+                <p>
+                    <span class="online-dot"></span>
+
+                    <span
+                        data-en="Online"
+                        data-hi="ऑनलाइन"
+                    >
+                        Online
+                    </span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button onclick="closeChatbot()">
+            ✕
+        </button>
+
+    </div>
+
+
+
+    <div
+        id="chat-messages"
+        class="chat-messages"
+    >
+
+        <div class="bot-message">
+
+            <div class="message-avatar">
+                🤖
+            </div>
+
+            <div class="message-bubble">
+
+                <p
+                    data-en="Hello! I'm Saathi. How can I help you today?"
+                    data-hi="नमस्ते! मैं साथी हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?"
+                >
+                    Hello! I'm Saathi. How can I help you today?
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chat-input-area">
+
+        <input
+            type="text"
+            id="chat-input"
+            placeholder="Type your message..."
+            onkeydown="handleChatEnter(event)"
+        >
+
+        <button onclick="sendChatMessage()">
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- DIGITAL TWIN PANEL -->
+<!-- ========================================= -->
+
+<div id="digital-twin-panel" class="side-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <p
+                data-en="SAATHI DIGITAL TWIN"
+                data-hi="साथी डिजिटल ट्विन"
+            >
+                SAATHI DIGITAL TWIN
+            </p>
+
+            <h2
+                data-en="🧠 Digital Twin"
+                data-hi="🧠 डिजिटल ट्विन"
+            >
+                🧠 Digital Twin
+            </h2>
+        </div>
+
+        <button onclick="closeDigitalTwinPanel()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="panel-content">
+
+        <!-- STATUS -->
+
+        <div class="twin-status-card">
+
+            <div class="twin-status-icon">
+                🧠
+            </div>
+
+            <div>
+                <p
+                    data-en="MONITORING STATUS"
+                    data-hi="निगरानी स्थिति"
+                >
+                    MONITORING STATUS
+                </p>
+
+                <h3
+                    data-en="Normal Activity"
+                    data-hi="सामान्य गतिविधि"
+                >
+                    Normal Activity
+                </h3>
+
+                <span
+                    data-en="No unusual activity detected"
+                    data-hi="कोई असामान्य गतिविधि नहीं मिली"
+                >
+                    No unusual activity detected
+                </span>
+            </div>
+
+            <div class="live-badge">
+                <span class="live-dot"></span>
+
+                <span
+                    data-en="DEMO"
+                    data-hi="डेमो"
+                >
+                    DEMO
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="twin-info-box">
+
+            <h3
+                data-en="What is your Digital Twin?"
+                data-hi="आपका डिजिटल ट्विन क्या है?"
+            >
+                What is your Digital Twin?
+            </h3>
+
+            <p
+                data-en="Saathi's Digital Twin is designed to learn a user's normal routine and help identify unusual activity patterns that may indicate a safety concern."
+                data-hi="साथी का डिजिटल ट्विन उपयोगकर्ता की सामान्य दिनचर्या को समझने और सुरक्षा से जुड़ी असामान्य गतिविधियों की पहचान करने के लिए डिज़ाइन किया गया है।"
+            >
+                Saathi's Digital Twin is designed to learn a user's
+                normal routine and help identify unusual activity
+                patterns that may indicate a safety concern.
+            </p>
+
+        </div>
+
+
+        <!-- TODAY ACTIVITY -->
+
+        <div class="twin-section-heading">
+
+            <div>
+                <p
+                    data-en="TODAY"
+                    data-hi="आज"
+                >
+                    TODAY
+                </p>
+
+                <h3
+                    data-en="Activity Overview"
+                    data-hi="गतिविधि का अवलोकन"
+                >
+                    Activity Overview
+                </h3>
+            </div>
+
+        </div>
+
+
+        <div class="twin-stats-grid">
+
+            <div class="twin-stat-card">
+
+                <div class="twin-stat-icon">
+                    🚶
+                </div>
+
+                <p
+                    data-en="Movement"
+                    data-hi="गतिविधि"
+                >
+                    Movement
+                </p>
+
+                <h3
+                    data-en="Normal"
+                    data-hi="सामान्य"
+                >
+                    Normal
+                </h3>
+
+            </div>
+
+
+            <div class="twin-stat-card">
+
+                <div class="twin-stat-icon">
+                    📍
+                </div>
+
+                <p
+                    data-en="Location Pattern"
+                    data-hi="स्थान पैटर्न"
+                >
+                    Location Pattern
+                </p>
+
+                <h3
+                    data-en="Normal"
+                    data-hi="सामान्य"
+                >
+                    Normal
+                </h3>
+
+            </div>
+
+
+            <div class="twin-stat-card">
+
+                <div class="twin-stat-icon">
+                    ⚠️
+                </div>
+
+                <p
+                    data-en="Anomalies"
+                    data-hi="असामान्यताएँ"
+                >
+                    Anomalies
+                </p>
+
+                <h3>0</h3>
+
+            </div>
+
+
+            <div class="twin-stat-card">
+
+                <div class="twin-stat-icon">
+                    🛡️
+                </div>
+
+                <p
+                    data-en="Safety Status"
+                    data-hi="सुरक्षा स्थिति"
+                >
+                    Safety Status
+                </p>
+
+                <h3
+                    class="twin-safe"
+                    data-en="Safe"
+                    data-hi="सुरक्षित"
+                >
+                    Safe
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- ROUTINE -->
+
+        <div class="twin-section-heading">
+
+            <div>
+                <p
+                    data-en="BEHAVIOUR PATTERN"
+                    data-hi="व्यवहार पैटर्न"
+                >
+                    BEHAVIOUR PATTERN
+                </p>
+
+                <h3
+                    data-en="Daily Routine"
+                    data-hi="दैनिक दिनचर्या"
+                >
+                    Daily Routine
+                </h3>
+            </div>
+
+        </div>
+
+
+        <div class="routine-timeline">
+
+            <div class="routine-item">
+
+                <div class="routine-dot"></div>
+
+                <div class="routine-time">
+                    08:00
+                </div>
+
+                <div class="routine-details">
+                    <h4
+                        data-en="Morning Activity"
+                        data-hi="सुबह की गतिविधि"
+                    >
+                        Morning Activity
+                    </h4>
+
+                    <p
+                        data-en="Normal routine pattern"
+                        data-hi="सामान्य दिनचर्या पैटर्न"
+                    >
+                        Normal routine pattern
+                    </p>
+                </div>
+
+                <span class="routine-check">
+                    ✓
+                </span>
+
+            </div>
+
+
+            <div class="routine-item">
+
+                <div class="routine-dot"></div>
+
+                <div class="routine-time">
+                    12:30
+                </div>
+
+                <div class="routine-details">
+                    <h4
+                        data-en="Day Activity"
+                        data-hi="दिन की गतिविधि"
+                    >
+                        Day Activity
+                    </h4>
+
+                    <p
+                        data-en="Expected activity"
+                        data-hi="अपेक्षित गतिविधि"
+                    >
+                        Expected activity
+                    </p>
+                </div>
+
+                <span class="routine-check">
+                    ✓
+                </span>
+
+            </div>
+
+
+            <div class="routine-item">
+
+                <div class="routine-dot"></div>
+
+                <div class="routine-time">
+                    18:00
+                </div>
+
+                <div class="routine-details">
+                    <h4
+                        data-en="Evening Activity"
+                        data-hi="शाम की गतिविधि"
+                    >
+                        Evening Activity
+                    </h4>
+
+                    <p
+                        data-en="Normal routine pattern"
+                        data-hi="सामान्य दिनचर्या पैटर्न"
+                    >
+                        Normal routine pattern
+                    </p>
+                </div>
+
+                <span class="routine-check">
+                    ✓
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ANOMALY -->
+
+        <div class="anomaly-card">
+
+            <div class="anomaly-icon">
+                🛡️
+            </div>
+
+            <div>
+                <p
+                    data-en="ANOMALY DETECTION"
+                    data-hi="असामान्यता पहचान"
+                >
+                    ANOMALY DETECTION
+                </p>
+
+                <h3
+                    data-en="Everything looks normal"
+                    data-hi="सब कुछ सामान्य है"
+                >
+                    Everything looks normal
+                </h3>
+
+                <span
+                    data-en="Saathi has not detected any unusual activity."
+                    data-hi="साथी ने कोई असामान्य गतिविधि नहीं पाई है।"
+                >
+                    Saathi has not detected any unusual activity.
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- PRIVACY -->
+
+        <div class="twin-privacy">
+
+            <span>🔒</span>
+
+            <div>
+                <strong
+                    data-en="Privacy First"
+                    data-hi="गोपनीयता प्राथमिकता"
+                >
+                    Privacy First
+                </strong>
+
+                <p
+                    data-en="This prototype displays simulated Digital Twin data. Actual monitoring and anomaly detection are not currently active."
+                    data-hi="यह प्रोटोटाइप सिम्युलेटेड डिजिटल ट्विन डेटा दिखाता है। वास्तविक निगरानी और असामान्यता पहचान अभी सक्रिय नहीं है।"
+                >
+                    This prototype displays simulated Digital Twin data.
+                    Actual monitoring and anomaly detection are not
+                    currently active.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MAIN JAVASCRIPT -->
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>
