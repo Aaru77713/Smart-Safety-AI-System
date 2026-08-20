@@ -818,7 +818,6 @@ function createAlarmBeep() {
         return;
     }
 
-
     let oscillator =
         audioContext.createOscillator();
 
@@ -826,31 +825,36 @@ function createAlarmBeep() {
         audioContext.createGain();
 
 
-    oscillator.type =
-        "sine";
+    oscillator.type = "sawtooth";
 
 
     oscillator.frequency.setValueAtTime(
-        620,
+        700,
         audioContext.currentTime
     );
 
 
-    oscillator.frequency.setValueAtTime(
-        880,
-        audioContext.currentTime + 0.18
+    oscillator.frequency.linearRampToValueAtTime(
+        1100,
+        audioContext.currentTime + 0.45
+    );
+
+
+    oscillator.frequency.linearRampToValueAtTime(
+        700,
+        audioContext.currentTime + 0.9
     );
 
 
     gain.gain.setValueAtTime(
-        0.18,
+        0.22,
         audioContext.currentTime
     );
 
 
-    gain.gain.exponentialRampToValueAtTime(
-        0.01,
-        audioContext.currentTime + 0.35
+    gain.gain.linearRampToValueAtTime(
+        0.12,
+        audioContext.currentTime + 0.9
     );
 
 
@@ -865,33 +869,21 @@ function createAlarmBeep() {
 
 
     oscillator.stop(
-        audioContext.currentTime + 0.35
+        audioContext.currentTime + 0.9
     );
 }
-
-
-function playAlarmSound() {
-
-    stopAlarmSound();
-
-
-    audioContext =
-        new (
-            window.AudioContext ||
-            window.webkitAudioContext
-        )();
 
 
     createAlarmBeep();
 
 
     alarmInterval =
-        setInterval(function () {
+    setInterval(function () {
 
-            createAlarmBeep();
+        createAlarmBeep();
 
-        }, 700);
-}
+    }, 950);
+
 
 
 function stopAlarmSound() {
