@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emergency Contact Test</title>
+</head>
+
+<body>
+
+<h2>Emergency Contact Test</h2>
+
+<button id="saveBtn">Save Emergency Contact</button>
+
+<p id="result"></p>
+
+<script>
+document.getElementById("saveBtn").addEventListener("click", async function () {
+
+    try {
+        const response = await fetch("http://localhost:5000/api/emergency-contacts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userId: "user01",
+                name: "Parent",
+                phone: "9876543210",
+                relation: "Father"
+            })
+        });
+
+        const data = await response.json();
+
+        document.getElementById("result").innerText = data.message;
+
+    } catch (error) {
+        document.getElementById("result").innerText =
+            "Error: " + error.message;
+    }
+
+});
+</script>
+
+</body>
+</html>
