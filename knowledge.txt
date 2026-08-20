@@ -1,0 +1,227 @@
+SAATHI-AI — DOMAIN KNOWLEDGE
+
+
+PURPOSE
+Saathi-AI is a Smart Safety System Assistant designed as an elderly safety companion. Its purpose is to support safer and more independent living for elderly people through emergency detection, alerts, location sharing, voice assistance, and family/caregiver communication.
+
+
+CORE IDEA / SOLUTION
+
+
+1. MULTI-LEVEL EMERGENCY DETECTION
+Saathi-AI uses multiple checks before escalating an emergency:
+- Event detected through camera/sensor.
+- Voice check can be used to confirm the user's condition.
+- Motion and sensor verification can help validate an event.
+- If there is no response or an emergency is confirmed, an alert can be triggered.
+- The system is designed to reduce false alarms by combining multiple signals rather than relying on a single detection.
+
+
+2. AI-ROUTINE LEARNING
+Saathi-AI includes an AI routine-learning concept for understanding an elderly user's normal routine.
+The concept is intended to:
+- Learn the user's daily routine.
+- Identify unusual deviations from the learned routine.
+- Support early detection of potentially unsafe situations.
+- Improve the relevance of emergency responses over time.
+Routine learning is an assistance mechanism; it should not be treated as a medical diagnosis.
+
+
+3. DIGITAL TWIN
+Saathi-AI proposes a digital-twin concept for maintaining a digital representation of relevant user safety information.
+The digital twin is intended to support:
+- User profile and important safety information.
+- Emergency context and relevant events.
+- Health/safety-related information provided for the system's operation.
+- Monitoring and decision support.
+- Personalized emergency assistance.
+
+
+4. SOS BUTTON
+The SOS button provides a direct emergency pathway.
+Planned capabilities include:
+- One-touch SOS activation.
+- Sharing the user's location.
+- Identifying/communicating with the nearest relevant emergency facility.
+- Sending emergency alerts to family members and caregivers.
+- Supporting emergency calling/communication.
+- Providing emergency context to contacts.
+
+
+PROBLEMS AND PROPOSED RESOLUTIONS
+
+
+Language barriers:
+- Saathi-AI uses a multilingual AI voice assistant.
+- It is intended to support regional-language voice assistance, voice commands, and spoken emergency guidance.
+
+
+User may be unable to press SOS:
+- Automatic emergency detection is intended to trigger assistance when the user cannot manually press the SOS button.
+
+
+Elderly person may fall when alone:
+- AI camera-based fall detection is proposed to identify a possible fall.
+
+
+False alarms from sensors:
+- Multi-level AI and sensor verification is used to validate an event before triggering an alert.
+
+
+Emergency may go unnoticed:
+- Voice confirmation can be used to ask the user whether they are okay.
+
+
+Family lacks real-time information:
+- Live location and emergency-context sharing are intended to keep family/caregivers informed.
+
+
+TECHNICAL APPROACH
+
+
+METHODOLOGY / PROCESS
+The proposed workflow is:
+1. User registers/logs in.
+2. User or the system triggers an SOS/emergency event.
+3. The request/event is processed.
+4. Relevant data is stored and managed.
+5. An alert manager handles the emergency.
+6. Alerts are sent to the appropriate contacts/services.
+
+
+TECHNOLOGIES PROPOSED
+- Frontend: HTML, CSS, JavaScript
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- Cloud storage: Firebase
+- Maps and location: Maps API
+- Notifications: Firebase Cloud Messaging (FCM)
+- Authentication: JWT / Firebase Auth
+- Hosting: Firebase Hosting
+
+
+KEY FEATURES
+1. AI-powered voice and chat assistance.
+2. Smart emergency detection using SOS, fall detection and smoke/other emergency signals.
+3. Real-time location tracking.
+4. Nearest police station and hospital identification.
+5. Automated emergency alerts to family and caregivers.
+6. Multilingual emergency communication.
+7. Secure user profile and emergency-contact management.
+8. Emergency history and alert logs.
+9. Digital twin of the elderly person.
+10. Smart emergency escalation: if the primary emergency contact does not respond, the system can automatically alert the next contact.
+
+
+TECHNICAL HIGHLIGHTS
+- Real-time event processing for emergency events.
+- API-based integration for location, communication and AI services.
+- Secure access control to protect user and emergency data.
+- Emergency data and logs for storing events, responses, timestamps and alert history.
+- Modular architecture integrating AI, location, communication and emergency modules.
+
+
+FEASIBILITY / RISKS AND MITIGATION
+
+
+1. False fall/emergency detection
+Risk: Wrong detection may lead to false alarms.
+Mitigation: Use camera + sensor + voice confirmation / multi-level verification.
+
+
+2. Privacy concerns with camera
+Risk: Continuous monitoring may raise privacy concerns.
+Mitigation: Prefer edge processing, process data locally where possible, and avoid strong continuous video monitoring.
+
+
+3. Internet/network failure
+Risk: Poor connectivity may delay alerts.
+Mitigation: Provide offline fallback, local detection and SMS/call alerts when internet is unavailable.
+
+
+4. Sensor failure
+Risk: Faulty sensor data can affect system accuracy.
+Mitigation: Cross-check multiple sensors and validate using multiple sources before triggering an alert.
+
+
+5. Power failure
+Risk: Power loss can stop the system from working.
+Mitigation: Use battery/UPS backup for critical components.
+
+
+6. Limited computing resources
+Risk: AI processing may be heavy for low-power devices.
+Mitigation: Use lightweight AI models and optimized models/edge devices to reduce computational load.
+
+
+IMPACT AND BENEFITS
+
+
+KEY BENEFITS FOR USERS AND SOCIETY
+- Safer and independent living: helps elderly individuals live alone with dignity, safety and confidence.
+- Faster emergency response: early detection and automatic alerts can reduce response time during health or critical situations.
+- Family peace of mind: families can stay informed with real-time alerts and context.
+- Reduced caregiver burden and costs: prevents serious incidents and unnecessary timely intervention where appropriate, helping reduce medical expenses and long-term care costs.
+- Better quality of life for all: improves overall well-being of elderly individuals and strengthens their communication with communities.
+
+
+SOCIAL IMPACT AT SCALE — FIGURES PRESENTED IN THE PPT
+- 50M+: elderly people in India (60+ age group).
+- 20M+: elderly living alone or in nuclear families.
+- Millions: lives that can potentially be impacted through proactive safety.
+- High scalability: the concept is intended to scale across urban and rural India.
+
+
+WHY IT MATTERS
+The PPT highlights:
+- Emergencies don't wait, and neither should safety.
+- Older adults may need timely intervention because emergencies can happen without warning.
+- Timely detection, alerts and response can significantly reduce complications and save lives.
+- Proactive safety and support can improve quality of life and strengthen communities.
+
+
+RESEARCH / REFERENCE INSIGHTS PRESENTED
+The PPT's research section highlights the need for an intelligent elderly safety companion using evidence related to:
+- Growth of the global elderly population.
+- Growth of India's elderly population.
+- Preferences in ageing/place of living.
+- Causes of injury deaths among older adults.
+- The projected growth of India's elderly population.
+
+
+The PPT references sources including:
+- United Nations (UN) population/ageing data.
+- NITI Aayog reports on senior citizens/ageing.
+- World Health Organization (WHO).
+- AI-based fall detection research.
+- Falls/WHO fact-sheet material.
+
+
+IMPORTANT DOMAIN BOUNDARY FOR THE CHATBOT
+
+
+Saathi-AI is an ELDERLY SAFETY AND EMERGENCY-ASSISTANCE project.
+
+
+The chatbot should answer questions primarily about:
+- Saathi-AI and its purpose.
+- Elderly safety.
+- Emergency detection and escalation.
+- Fall detection.
+- SOS functionality.
+- Voice confirmation.
+- AI routine learning.
+- Digital twin concept.
+- Location tracking and emergency-contact communication.
+- Multilingual emergency assistance.
+- Technical architecture and proposed technologies.
+- Risks, feasibility and mitigation measures.
+- Expected social impact and benefits.
+- Research points and references included in this knowledge file.
+
+
+If a question is outside this domain, the chatbot should politely say that it is designed specifically for Saathi-AI and elderly safety/emergency assistance and ask the user to ask a related question.
+
+
+SAFETY LIMITATION
+Saathi-AI is a safety-assistance concept, not a replacement for doctors, hospitals, police, ambulance services, or other professional emergency responders. For a real emergency, the user should contact the appropriate local emergency service immediately.
