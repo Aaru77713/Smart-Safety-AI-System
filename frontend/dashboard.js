@@ -7,9 +7,6 @@
 // 1. CHATBOT URL
 // =====================================================
 
-// Agar Streamlit kisi aur port par chal raha hai,
-// sirf yahan URL change karna.
-
 const CHATBOT_URL = "http://localhost:8506";
 
 
@@ -24,23 +21,17 @@ let currentUserEmail =
     localStorage.getItem("currentUser");
 
 
-// Login nahi hai
 if (!currentUserEmail) {
-
-    window.location.href =
-        "login.html";
+    window.location.href = "login.html";
 }
 
 
-// Current user find karo
 let currentUser =
     users.find(function (user) {
-
         return user.email === currentUserEmail;
     });
 
 
-// Dashboard par user data show karo
 if (currentUser) {
 
     let userName =
@@ -63,39 +54,28 @@ if (currentUser) {
 
 
     if (userName) {
-        userName.innerText =
-            currentUser.name;
+        userName.innerText = currentUser.name;
     }
-
 
     if (profileName) {
-        profileName.innerText =
-            currentUser.name;
+        profileName.innerText = currentUser.name;
     }
-
 
     if (profileEmail) {
-        profileEmail.innerText =
-            currentUser.email;
+        profileEmail.innerText = currentUser.email;
     }
-
 
     if (profilePhone) {
         profilePhone.innerText =
             currentUser.phone || "--";
     }
 
-
     if (profileAge) {
         profileAge.innerText =
             currentUser.age || "--";
     }
 
-
-    if (
-        profileCircle &&
-        currentUser.name
-    ) {
+    if (profileCircle && currentUser.name) {
 
         profileCircle.innerText =
             currentUser.name
@@ -111,31 +91,22 @@ if (currentUser) {
 
 function logout() {
 
-    localStorage.removeItem(
-        "currentUser"
-    );
+    localStorage.removeItem("currentUser");
 
-
-    window.location.href =
-        "login.html";
+    window.location.href = "login.html";
 }
 
 
 // =====================================================
-// 4. DARK / LIGHT MODE
+// 4. THEME
 // =====================================================
 
 function toggleTheme() {
 
-    document.body
-        .classList
-        .toggle("light-mode");
-
+    document.body.classList.toggle("light-mode");
 
     let themeButton =
-        document.getElementById(
-            "theme-button"
-        );
+        document.getElementById("theme-button");
 
 
     if (!themeButton) {
@@ -144,18 +115,14 @@ function toggleTheme() {
 
 
     if (
-        document.body
-            .classList
-            .contains("light-mode")
+        document.body.classList.contains("light-mode")
     ) {
 
-        themeButton.innerText =
-            "🌙";
+        themeButton.innerText = "🌙";
 
     } else {
 
-        themeButton.innerText =
-            "☀️";
+        themeButton.innerText = "☀️";
     }
 }
 
@@ -169,41 +136,30 @@ let hindiMode = false;
 
 function changeLanguage() {
 
-    hindiMode =
-        !hindiMode;
+    hindiMode = !hindiMode;
 
 
     let elements =
-        document.querySelectorAll(
-            "[data-en]"
-        );
+        document.querySelectorAll("[data-en]");
 
 
-    elements.forEach(
-        function (element) {
+    elements.forEach(function (element) {
 
-            if (hindiMode) {
+        if (hindiMode) {
 
-                element.innerText =
-                    element.getAttribute(
-                        "data-hi"
-                    );
+            element.innerText =
+                element.getAttribute("data-hi");
 
-            } else {
+        } else {
 
-                element.innerText =
-                    element.getAttribute(
-                        "data-en"
-                    );
-            }
+            element.innerText =
+                element.getAttribute("data-en");
         }
-    );
+    });
 
 
     let languageButton =
-        document.getElementById(
-            "language-button"
-        );
+        document.getElementById("language-button");
 
 
     if (languageButton) {
@@ -217,29 +173,22 @@ function changeLanguage() {
 
 
 // =====================================================
-// 6. CLOSE ALL SIDE PANELS
+// 6. COMMON PANEL SYSTEM
 // =====================================================
 
 function closeAllPanels() {
 
     let panels =
-        document.querySelectorAll(
-            ".side-panel"
-        );
+        document.querySelectorAll(".side-panel");
 
 
-    panels.forEach(
-        function (panel) {
+    panels.forEach(function (panel) {
 
-            panel.classList.remove(
-                "panel-open"
-            );
-        }
-    );
+        panel.classList.remove("panel-open");
+    });
 }
 
 
-// Dashboard par wapas
 function showDashboard() {
 
     closeAllPanels();
@@ -254,18 +203,12 @@ function openFamilyPanel() {
 
     closeAllPanels();
 
-
     let panel =
-        document.getElementById(
-            "family-panel"
-        );
+        document.getElementById("family-panel");
 
 
     if (panel) {
-
-        panel.classList.add(
-            "panel-open"
-        );
+        panel.classList.add("panel-open");
     }
 }
 
@@ -273,16 +216,11 @@ function openFamilyPanel() {
 function closeFamilyPanel() {
 
     let panel =
-        document.getElementById(
-            "family-panel"
-        );
+        document.getElementById("family-panel");
 
 
     if (panel) {
-
-        panel.classList.remove(
-            "panel-open"
-        );
+        panel.classList.remove("panel-open");
     }
 }
 
@@ -294,16 +232,11 @@ function closeFamilyPanel() {
 function showContactForm() {
 
     let form =
-        document.getElementById(
-            "contact-form"
-        );
+        document.getElementById("contact-form");
 
 
     if (form) {
-
-        form.classList.add(
-            "show"
-        );
+        form.classList.add("show");
     }
 }
 
@@ -311,16 +244,11 @@ function showContactForm() {
 function hideContactForm() {
 
     let form =
-        document.getElementById(
-            "contact-form"
-        );
+        document.getElementById("contact-form");
 
 
     if (form) {
-
-        form.classList.remove(
-            "show"
-        );
+        form.classList.remove("show");
     }
 }
 
@@ -332,19 +260,13 @@ function hideContactForm() {
 function saveEmergencyContact() {
 
     let nameElement =
-        document.getElementById(
-            "contact-name"
-        );
+        document.getElementById("contact-name");
 
     let phoneElement =
-        document.getElementById(
-            "contact-phone"
-        );
+        document.getElementById("contact-phone");
 
     let relationElement =
-        document.getElementById(
-            "contact-relation"
-        );
+        document.getElementById("contact-relation");
 
 
     if (
@@ -352,7 +274,6 @@ function saveEmergencyContact() {
         !phoneElement ||
         !relationElement
     ) {
-
         return;
     }
 
@@ -383,9 +304,6 @@ function saveEmergencyContact() {
     }
 
 
-    // Backend integration ke time
-    // yahan POST API lagegi.
-
     alert(
         hindiMode
             ? "संपर्क बैकएंड इंटीग्रेशन के बाद सेव होगा।"
@@ -415,46 +333,32 @@ function openLocationPanel() {
 
 
     let panel =
-        document.getElementById(
-            "location-panel"
-        );
+        document.getElementById("location-panel");
 
 
     if (panel) {
-
-        panel.classList.add(
-            "panel-open"
-        );
+        panel.classList.add("panel-open");
     }
 
 
-    setTimeout(
-        function () {
+    setTimeout(function () {
 
-            if (map) {
+        if (map) {
+            map.invalidateSize();
+        }
 
-                map.invalidateSize();
-            }
-
-        },
-        450
-    );
+    }, 450);
 }
 
 
 function closeLocationPanel() {
 
     let panel =
-        document.getElementById(
-            "location-panel"
-        );
+        document.getElementById("location-panel");
 
 
     if (panel) {
-
-        panel.classList.remove(
-            "panel-open"
-        );
+        panel.classList.remove("panel-open");
     }
 }
 
@@ -466,14 +370,10 @@ function closeLocationPanel() {
 function getCurrentLocation() {
 
     let status =
-        document.getElementById(
-            "location-status"
-        );
+        document.getElementById("location-status");
 
 
-    if (
-        !navigator.geolocation
-    ) {
+    if (!navigator.geolocation) {
 
         if (status) {
 
@@ -496,137 +396,116 @@ function getCurrentLocation() {
     }
 
 
-    navigator.geolocation
-        .getCurrentPosition(
+    navigator.geolocation.getCurrentPosition(
 
-            // SUCCESS
-            function (position) {
+        function (position) {
 
-                let latitude =
-                    position.coords.latitude;
+            let latitude =
+                position.coords.latitude;
 
-                let longitude =
-                    position.coords.longitude;
+            let longitude =
+                position.coords.longitude;
 
 
-                let latitudeElement =
-                    document.getElementById(
-                        "latitude"
-                    );
+            let latitudeElement =
+                document.getElementById("latitude");
 
-                let longitudeElement =
-                    document.getElementById(
-                        "longitude"
-                    );
+            let longitudeElement =
+                document.getElementById("longitude");
 
 
-                if (latitudeElement) {
-
-                    latitudeElement.innerText =
-                        latitude.toFixed(6);
-                }
-
-
-                if (longitudeElement) {
-
-                    longitudeElement.innerText =
-                        longitude.toFixed(6);
-                }
-
-
-                if (status) {
-
-                    status.innerText =
-                        hindiMode
-                            ? "स्थान सफलतापूर्वक प्राप्त हुआ"
-                            : "Location detected successfully";
-                }
-
-
-                let emergencyLocationStatus =
-                    document.getElementById(
-                        "emergency-location-status"
-                    );
-
-
-                if (
-                    emergencyLocationStatus
-                ) {
-
-                    emergencyLocationStatus.innerText =
-                        hindiMode
-                            ? "स्थान उपलब्ध है"
-                            : "Location available";
-                }
-
-
-                showLocationOnMap(
-                    latitude,
-                    longitude
-                );
-
-
-                findNearbyServices(
-                    latitude,
-                    longitude
-                );
-            },
-
-
-            // ERROR
-            function (error) {
-
-                if (!status) {
-                    return;
-                }
-
-
-                if (error.code === 1) {
-
-                    status.innerText =
-                        hindiMode
-                            ? "स्थान की अनुमति नहीं दी गई।"
-                            : "Location permission denied.";
-
-                } else if (
-                    error.code === 2
-                ) {
-
-                    status.innerText =
-                        hindiMode
-                            ? "स्थान उपलब्ध नहीं है।"
-                            : "Location unavailable.";
-
-                } else if (
-                    error.code === 3
-                ) {
-
-                    status.innerText =
-                        hindiMode
-                            ? "स्थान अनुरोध का समय समाप्त हो गया।"
-                            : "Location request timed out.";
-
-                } else {
-
-                    status.innerText =
-                        hindiMode
-                            ? "स्थान प्राप्त नहीं हो सका।"
-                            : "Unable to get location.";
-                }
-            },
-
-
-            {
-                enableHighAccuracy:
-                    true,
-
-                timeout:
-                    10000,
-
-                maximumAge:
-                    0
+            if (latitudeElement) {
+                latitudeElement.innerText =
+                    latitude.toFixed(6);
             }
-        );
+
+            if (longitudeElement) {
+                longitudeElement.innerText =
+                    longitude.toFixed(6);
+            }
+
+
+            if (status) {
+
+                status.innerText =
+                    hindiMode
+                        ? "स्थान सफलतापूर्वक प्राप्त हुआ"
+                        : "Location detected successfully";
+            }
+
+
+            let emergencyStatus =
+                document.getElementById(
+                    "emergency-location-status"
+                );
+
+
+            if (emergencyStatus) {
+
+                emergencyStatus.innerText =
+                    hindiMode
+                        ? "स्थान उपलब्ध है"
+                        : "Location available";
+            }
+
+
+            showLocationOnMap(
+                latitude,
+                longitude
+            );
+
+
+            findNearbyServices(
+                latitude,
+                longitude
+            );
+        },
+
+
+        function (error) {
+
+            if (!status) {
+                return;
+            }
+
+
+            if (error.code === 1) {
+
+                status.innerText =
+                    hindiMode
+                        ? "स्थान की अनुमति नहीं दी गई।"
+                        : "Location permission denied.";
+
+            } else if (error.code === 2) {
+
+                status.innerText =
+                    hindiMode
+                        ? "स्थान उपलब्ध नहीं है।"
+                        : "Location unavailable.";
+
+            } else if (error.code === 3) {
+
+                status.innerText =
+                    hindiMode
+                        ? "स्थान अनुरोध का समय समाप्त हो गया।"
+                        : "Location request timed out.";
+
+            } else {
+
+                status.innerText =
+                    hindiMode
+                        ? "स्थान प्राप्त नहीं हो सका।"
+                        : "Unable to get location.";
+            }
+        },
+
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
 }
 
 
@@ -639,13 +518,9 @@ function showLocationOnMap(
     longitude
 ) {
 
-    if (
-        typeof L === "undefined"
-    ) {
+    if (typeof L === "undefined") {
 
-        console.log(
-            "Leaflet is not loaded."
-        );
+        console.log("Leaflet is not loaded.");
 
         return;
     }
@@ -672,20 +547,18 @@ function showLocationOnMap(
                 attribution:
                     "&copy; OpenStreetMap contributors"
             }
-        )
-        .addTo(map);
+        ).addTo(map);
     }
 
 
     if (locationMarker) {
 
-        locationMarker
-            .setLatLng(
-                [
-                    latitude,
-                    longitude
-                ]
-            );
+        locationMarker.setLatLng(
+            [
+                latitude,
+                longitude
+            ]
+        );
 
     } else {
 
@@ -695,8 +568,7 @@ function showLocationOnMap(
                     latitude,
                     longitude
                 ]
-            )
-            .addTo(map);
+            ).addTo(map);
     }
 
 
@@ -718,19 +590,16 @@ function showLocationOnMap(
     );
 
 
-    setTimeout(
-        function () {
+    setTimeout(function () {
 
-            map.invalidateSize();
+        map.invalidateSize();
 
-        },
-        100
-    );
+    }, 100);
 }
 
 
 // =====================================================
-// 14. FIND NEARBY HOSPITALS + POLICE
+// 14. NEARBY HOSPITALS + POLICE
 // =====================================================
 
 async function findNearbyServices(
@@ -745,7 +614,6 @@ async function findNearbyServices(
 
 
     if (!nearbyBox) {
-
         return;
     }
 
@@ -756,18 +624,12 @@ async function findNearbyServices(
             : "<p>Finding nearby emergency services...</p>";
 
 
-    // Old markers remove
-    nearbyMarkers.forEach(
-        function (marker) {
+    nearbyMarkers.forEach(function (marker) {
 
-            if (map) {
-
-                map.removeLayer(
-                    marker
-                );
-            }
+        if (map) {
+            map.removeLayer(marker);
         }
-    );
+    });
 
 
     nearbyMarkers = [];
@@ -785,17 +647,13 @@ async function findNearbyServices(
 
     let url =
         "https://overpass-api.de/api/interpreter?data=" +
-        encodeURIComponent(
-            query
-        );
+        encodeURIComponent(query);
 
 
     try {
 
         let response =
-            await fetch(
-                url
-            );
+            await fetch(url);
 
 
         if (!response.ok) {
@@ -811,8 +669,7 @@ async function findNearbyServices(
             await response.json();
 
 
-        nearbyBox.innerHTML =
-            "";
+        nearbyBox.innerHTML = "";
 
 
         if (
@@ -829,146 +686,129 @@ async function findNearbyServices(
         }
 
 
-        data.elements.forEach(
-            function (place) {
+        data.elements.forEach(function (place) {
 
-                let tags =
-                    place.tags || {};
-
-
-                let type =
-                    tags.amenity;
+            let tags =
+                place.tags || {};
 
 
-                let name =
-                    tags.name ||
-                    (
-                        type === "hospital"
-                            ? "Unnamed Hospital"
-                            : "Unnamed Police Station"
-                    );
+            let type =
+                tags.amenity;
 
 
-                let placeLat =
-                    place.lat ||
-                    (
-                        place.center
-                            ? place.center.lat
-                            : null
-                    );
-
-
-                let placeLon =
-                    place.lon ||
-                    (
-                        place.center
-                            ? place.center.lon
-                            : null
-                    );
-
-
-                if (
-                    placeLat === null ||
-                    placeLon === null
-                ) {
-
-                    return;
-                }
-
-
-                // Card
-                let card =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                card.className =
-                    "nearby-card";
-
-
-                let heading =
-                    document.createElement(
-                        "h4"
-                    );
-
-
-                let description =
-                    document.createElement(
-                        "p"
-                    );
-
-
-                if (
+            let name =
+                tags.name ||
+                (
                     type === "hospital"
-                ) {
-
-                    heading.innerText =
-                        "🏥 " +
-                        name;
-
-
-                    description.innerText =
-                        hindiMode
-                            ? "अस्पताल"
-                            : "Hospital";
-
-                } else {
-
-                    heading.innerText =
-                        "🚓 " +
-                        name;
-
-
-                    description.innerText =
-                        hindiMode
-                            ? "पुलिस स्टेशन"
-                            : "Police Station";
-                }
-
-
-                card.appendChild(
-                    heading
+                        ? "Unnamed Hospital"
+                        : "Unnamed Police Station"
                 );
 
 
-                card.appendChild(
-                    description
+            let placeLat =
+                place.lat ||
+                (
+                    place.center
+                        ? place.center.lat
+                        : null
                 );
 
 
-                nearbyBox.appendChild(
-                    card
+            let placeLon =
+                place.lon ||
+                (
+                    place.center
+                        ? place.center.lon
+                        : null
                 );
 
 
-                // Marker
-                if (map) {
-
-                    let marker =
-                        L.marker(
-                            [
-                                placeLat,
-                                placeLon
-                            ]
-                        )
-                        .addTo(map)
-                        .bindPopup(
-                            (
-                                type === "hospital"
-                                    ? "🏥 "
-                                    : "🚓 "
-                            ) +
-                            name
-                        );
-
-
-                    nearbyMarkers.push(
-                        marker
-                    );
-                }
+            if (
+                placeLat === null ||
+                placeLon === null
+            ) {
+                return;
             }
-        );
+
+
+            let card =
+                document.createElement("div");
+
+
+            card.className =
+                "nearby-card";
+
+
+            let heading =
+                document.createElement("h4");
+
+
+            let description =
+                document.createElement("p");
+
+
+            if (type === "hospital") {
+
+                heading.innerText =
+                    "🏥 " + name;
+
+
+                description.innerText =
+                    hindiMode
+                        ? "अस्पताल"
+                        : "Hospital";
+
+            } else {
+
+                heading.innerText =
+                    "🚓 " + name;
+
+
+                description.innerText =
+                    hindiMode
+                        ? "पुलिस स्टेशन"
+                        : "Police Station";
+            }
+
+
+            card.appendChild(
+                heading
+            );
+
+
+            card.appendChild(
+                description
+            );
+
+
+            nearbyBox.appendChild(
+                card
+            );
+
+
+            if (map) {
+
+                let marker =
+                    L.marker(
+                        [
+                            placeLat,
+                            placeLon
+                        ]
+                    )
+                    .addTo(map)
+                    .bindPopup(
+                        (
+                            type === "hospital"
+                                ? "🏥 "
+                                : "🚓 "
+                        ) +
+                        name
+                    );
+
+
+                nearbyMarkers.push(marker);
+            }
+        });
 
     } catch (error) {
 
@@ -1002,10 +842,7 @@ function openAlertsPanel() {
 
 
     if (panel) {
-
-        panel.classList.add(
-            "panel-open"
-        );
+        panel.classList.add("panel-open");
     }
 }
 
@@ -1019,10 +856,7 @@ function closeAlertsPanel() {
 
 
     if (panel) {
-
-        panel.classList.remove(
-            "panel-open"
-        );
+        panel.classList.remove("panel-open");
     }
 }
 
@@ -1057,9 +891,172 @@ function openEmergencyPanel() {
 
 
     if (panel) {
-
-        panel.classList.add(
-            "panel-open"
-        );
+        panel.classList.add("panel-open");
     }
 }
+
+
+function closeEmergencyPanel() {
+
+    let panel =
+        document.getElementById(
+            "emergency-panel"
+        );
+
+
+    if (panel) {
+        panel.classList.remove("panel-open");
+    }
+}
+
+
+// =====================================================
+// 18. DIGITAL TWIN PANEL
+// =====================================================
+
+function openDigitalTwinPanel() {
+
+    closeAllPanels();
+
+
+    let panel =
+        document.getElementById(
+            "digital-twin-panel"
+        );
+
+
+    if (panel) {
+        panel.classList.add("panel-open");
+    }
+}
+
+
+function closeDigitalTwinPanel() {
+
+    let panel =
+        document.getElementById(
+            "digital-twin-panel"
+        );
+
+
+    if (panel) {
+        panel.classList.remove("panel-open");
+    }
+}
+
+
+// =====================================================
+// 19. EMERGENCY SIREN
+// =====================================================
+
+let audioContext = null;
+
+let sirenOscillator = null;
+
+let sirenGain = null;
+
+let sirenInterval = null;
+
+
+function playAlarmSound() {
+
+    stopAlarmSound();
+
+
+    try {
+
+        let AudioContextClass =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+        audioContext =
+            new AudioContextClass();
+
+
+        if (
+            audioContext.state === "suspended"
+        ) {
+
+            audioContext.resume();
+        }
+
+
+        sirenOscillator =
+            audioContext.createOscillator();
+
+
+        sirenGain =
+            audioContext.createGain();
+
+
+        sirenOscillator.type =
+            "sawtooth";
+
+
+        sirenGain.gain.value =
+            0.12;
+
+
+        sirenOscillator.connect(
+            sirenGain
+        );
+
+
+        sirenGain.connect(
+            audioContext.destination
+        );
+
+
+        sirenOscillator.frequency.value =
+            700;
+
+
+        sirenOscillator.start();
+
+
+        let highTone =
+            false;
+
+
+        sirenInterval =
+            setInterval(function () {
+
+                if (
+                    !audioContext ||
+                    !sirenOscillator
+                ) {
+                    return;
+                }
+
+
+                let target =
+                    highTone
+                        ? 700
+                        : 1100;
+
+
+                sirenOscillator
+                    .frequency
+                    .cancelScheduledValues(
+                        audioContext.currentTime
+                    );
+
+
+                sirenOscillator
+                    .frequency
+                    .linearRampToValueAtTime(
+                        target,
+                        audioContext.currentTime + 0.35
+                    );
+
+
+                highTone =
+                    !highTone;
+
+            }, 400);
+
+    } catch (error) {
+
+        console.error(
+            "Siren error:",
