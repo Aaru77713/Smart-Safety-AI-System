@@ -1,298 +1,180 @@
-// =====================================================
-// SAATHI DASHBOARD JAVASCRIPT
-// =====================================================
+// ==============================
+// CURRENT USER
+// ==============================
 
-
-// =====================================================
-// 1. CHATBOT URL
-// =====================================================
-
-const CHATBOT_URL = "http://localhost:8506";
-
-
-// =====================================================
-// 2. CURRENT USER
-// =====================================================
-
-let users =
-    JSON.parse(localStorage.getItem("users")) || [];
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
 let currentUserEmail =
     localStorage.getItem("currentUser");
 
-
 if (!currentUserEmail) {
     window.location.href = "login.html";
 }
-
 
 let currentUser =
     users.find(function (user) {
         return user.email === currentUserEmail;
     });
 
-
 if (currentUser) {
+    document.getElementById("user-name").innerText =
+        currentUser.name;
 
-    let userName =
-        document.getElementById("user-name");
+    document.getElementById("profile-name").innerText =
+        currentUser.name;
 
-    let profileName =
-        document.getElementById("profile-name");
+    document.getElementById("profile-email").innerText =
+        currentUser.email;
 
-    let profileEmail =
-        document.getElementById("profile-email");
+    document.getElementById("profile-phone").innerText =
+        currentUser.phone || "--";
 
-    let profilePhone =
-        document.getElementById("profile-phone");
+    document.getElementById("profile-age").innerText =
+        currentUser.age || "--";
 
-    let profileAge =
-        document.getElementById("profile-age");
-
-    let profileCircle =
-        document.querySelector(".profile-circle");
-
-
-    if (userName) {
-        userName.innerText = currentUser.name;
-    }
-
-    if (profileName) {
-        profileName.innerText = currentUser.name;
-    }
-
-    if (profileEmail) {
-        profileEmail.innerText = currentUser.email;
-    }
-
-    if (profilePhone) {
-        profilePhone.innerText =
-            currentUser.phone || "--";
-    }
-
-    if (profileAge) {
-        profileAge.innerText =
-            currentUser.age || "--";
-    }
-
-    if (profileCircle && currentUser.name) {
-
-        profileCircle.innerText =
-            currentUser.name
-                .charAt(0)
-                .toUpperCase();
-    }
+    document.querySelector(".profile-circle").innerText =
+        currentUser.name.charAt(0).toUpperCase();
 }
 
 
-// =====================================================
-// 3. LOGOUT
-// =====================================================
+// ==============================
+// LOGOUT
+// ==============================
 
 function logout() {
-
     localStorage.removeItem("currentUser");
-
     window.location.href = "login.html";
 }
 
 
-// =====================================================
-// 4. THEME
-// =====================================================
+// ==============================
+// THEME
+// ==============================
 
 function toggleTheme() {
 
     document.body.classList.toggle("light-mode");
 
-    let themeButton =
+    let button =
         document.getElementById("theme-button");
 
-
-    if (!themeButton) {
-        return;
-    }
-
-
-    if (
-        document.body.classList.contains("light-mode")
-    ) {
-
-        themeButton.innerText = "🌙";
-
+    if (document.body.classList.contains("light-mode")) {
+        button.innerText = "🌙";
     } else {
-
-        themeButton.innerText = "☀️";
+        button.innerText = "☀️";
     }
 }
 
 
-// =====================================================
-// 5. LANGUAGE
-// =====================================================
+// ==============================
+// LANGUAGE
+// ==============================
 
 let hindiMode = false;
-
 
 function changeLanguage() {
 
     hindiMode = !hindiMode;
 
-
     let elements =
         document.querySelectorAll("[data-en]");
-
 
     elements.forEach(function (element) {
 
         if (hindiMode) {
-
             element.innerText =
                 element.getAttribute("data-hi");
-
         } else {
-
             element.innerText =
                 element.getAttribute("data-en");
         }
     });
 
-
     let languageButton =
         document.getElementById("language-button");
 
+    languageButton.innerText =
+        hindiMode
+            ? "हिंदी / EN"
+            : "EN / हिंदी";
 
-    if (languageButton) {
+    let chatInput =
+        document.getElementById("chat-input");
 
-        languageButton.innerText =
+    if (chatInput) {
+        chatInput.placeholder =
             hindiMode
-                ? "हिंदी / EN"
-                : "EN / हिंदी";
+                ? "अपना संदेश लिखें..."
+                : "Type your message...";
     }
 }
 
 
-// =====================================================
-// 6. COMMON PANEL SYSTEM
-// =====================================================
+// ==============================
+// PANEL SYSTEM
+// ==============================
 
 function closeAllPanels() {
 
     let panels =
         document.querySelectorAll(".side-panel");
 
-
     panels.forEach(function (panel) {
-
         panel.classList.remove("panel-open");
     });
 }
 
-
 function showDashboard() {
-
     closeAllPanels();
 }
 
 
-// =====================================================
-// 7. FAMILY PANEL
-// =====================================================
+// ==============================
+// FAMILY PANEL
+// ==============================
 
 function openFamilyPanel() {
 
     closeAllPanels();
 
-    let panel =
-        document.getElementById("family-panel");
-
-
-    if (panel) {
-        panel.classList.add("panel-open");
-    }
+    document
+        .getElementById("family-panel")
+        .classList.add("panel-open");
 }
-
 
 function closeFamilyPanel() {
 
-    let panel =
-        document.getElementById("family-panel");
-
-
-    if (panel) {
-        panel.classList.remove("panel-open");
-    }
+    document
+        .getElementById("family-panel")
+        .classList.remove("panel-open");
 }
-
-
-// =====================================================
-// 8. CONTACT FORM
-// =====================================================
 
 function showContactForm() {
 
-    let form =
-        document.getElementById("contact-form");
-
-
-    if (form) {
-        form.classList.add("show");
-    }
+    document
+        .getElementById("contact-form")
+        .classList.add("show");
 }
-
 
 function hideContactForm() {
 
-    let form =
-        document.getElementById("contact-form");
-
-
-    if (form) {
-        form.classList.remove("show");
-    }
+    document
+        .getElementById("contact-form")
+        .classList.remove("show");
 }
-
-
-// =====================================================
-// 9. SAVE EMERGENCY CONTACT
-// =====================================================
 
 function saveEmergencyContact() {
 
-    let nameElement =
-        document.getElementById("contact-name");
-
-    let phoneElement =
-        document.getElementById("contact-phone");
-
-    let relationElement =
-        document.getElementById("contact-relation");
-
-
-    if (
-        !nameElement ||
-        !phoneElement ||
-        !relationElement
-    ) {
-        return;
-    }
-
-
     let name =
-        nameElement.value.trim();
+        document.getElementById("contact-name").value.trim();
 
     let phone =
-        phoneElement.value.trim();
+        document.getElementById("contact-phone").value.trim();
 
     let relation =
-        relationElement.value;
+        document.getElementById("contact-relation").value;
 
-
-    if (
-        name === "" ||
-        phone === "" ||
-        relation === ""
-    ) {
+    if (!name || !phone || !relation) {
 
         alert(
             hindiMode
@@ -303,7 +185,6 @@ function saveEmergencyContact() {
         return;
     }
 
-
     alert(
         hindiMode
             ? "संपर्क बैकएंड इंटीग्रेशन के बाद सेव होगा।"
@@ -312,34 +193,21 @@ function saveEmergencyContact() {
 }
 
 
-// =====================================================
-// 10. LOCATION VARIABLES
-// =====================================================
+// ==============================
+// LOCATION
+// ==============================
 
 let map = null;
-
 let locationMarker = null;
-
 let nearbyMarkers = [];
-
-
-// =====================================================
-// 11. LOCATION PANEL
-// =====================================================
 
 function openLocationPanel() {
 
     closeAllPanels();
 
-
-    let panel =
-        document.getElementById("location-panel");
-
-
-    if (panel) {
-        panel.classList.add("panel-open");
-    }
-
+    document
+        .getElementById("location-panel")
+        .classList.add("panel-open");
 
     setTimeout(function () {
 
@@ -350,51 +218,32 @@ function openLocationPanel() {
     }, 450);
 }
 
-
 function closeLocationPanel() {
 
-    let panel =
-        document.getElementById("location-panel");
-
-
-    if (panel) {
-        panel.classList.remove("panel-open");
-    }
+    document
+        .getElementById("location-panel")
+        .classList.remove("panel-open");
 }
-
-
-// =====================================================
-// 12. GET CURRENT LOCATION
-// =====================================================
 
 function getCurrentLocation() {
 
     let status =
         document.getElementById("location-status");
 
-
     if (!navigator.geolocation) {
 
-        if (status) {
-
-            status.innerText =
-                hindiMode
-                    ? "यह ब्राउज़र स्थान का समर्थन नहीं करता।"
-                    : "Location is not supported.";
-        }
+        status.innerText =
+            hindiMode
+                ? "यह ब्राउज़र स्थान का समर्थन नहीं करता।"
+                : "Location is not supported.";
 
         return;
     }
 
-
-    if (status) {
-
-        status.innerText =
-            hindiMode
-                ? "स्थान प्राप्त किया जा रहा है..."
-                : "Getting your location...";
-    }
-
+    status.innerText =
+        hindiMode
+            ? "स्थान प्राप्त किया जा रहा है..."
+            : "Getting your location...";
 
     navigator.geolocation.getCurrentPosition(
 
@@ -406,54 +255,33 @@ function getCurrentLocation() {
             let longitude =
                 position.coords.longitude;
 
+            document.getElementById("latitude").innerText =
+                latitude.toFixed(6);
 
-            let latitudeElement =
-                document.getElementById("latitude");
+            document.getElementById("longitude").innerText =
+                longitude.toFixed(6);
 
-            let longitudeElement =
-                document.getElementById("longitude");
-
-
-            if (latitudeElement) {
-                latitudeElement.innerText =
-                    latitude.toFixed(6);
-            }
-
-            if (longitudeElement) {
-                longitudeElement.innerText =
-                    longitude.toFixed(6);
-            }
-
-
-            if (status) {
-
-                status.innerText =
-                    hindiMode
-                        ? "स्थान सफलतापूर्वक प्राप्त हुआ"
-                        : "Location detected successfully";
-            }
-
+            status.innerText =
+                hindiMode
+                    ? "स्थान सफलतापूर्वक प्राप्त हुआ"
+                    : "Location detected successfully";
 
             let emergencyStatus =
                 document.getElementById(
                     "emergency-location-status"
                 );
 
-
             if (emergencyStatus) {
-
                 emergencyStatus.innerText =
                     hindiMode
                         ? "स्थान उपलब्ध है"
                         : "Location available";
             }
 
-
             showLocationOnMap(
                 latitude,
                 longitude
             );
-
 
             findNearbyServices(
                 latitude,
@@ -461,13 +289,7 @@ function getCurrentLocation() {
             );
         },
 
-
         function (error) {
-
-            if (!status) {
-                return;
-            }
-
 
             if (error.code === 1) {
 
@@ -499,7 +321,6 @@ function getCurrentLocation() {
             }
         },
 
-
         {
             enableHighAccuracy: true,
             timeout: 10000,
@@ -508,69 +329,39 @@ function getCurrentLocation() {
     );
 }
 
-
-// =====================================================
-// 13. SHOW LOCATION ON MAP
-// =====================================================
-
-function showLocationOnMap(
-    latitude,
-    longitude
-) {
-
-    if (typeof L === "undefined") {
-
-        console.log("Leaflet is not loaded.");
-
-        return;
-    }
-
+function showLocationOnMap(latitude, longitude) {
 
     if (!map) {
 
         map =
-            L.map("map")
-                .setView(
-                    [
-                        latitude,
-                        longitude
-                    ],
-                    16
-                );
-
+            L.map("map").setView(
+                [latitude, longitude],
+                16
+            );
 
         L.tileLayer(
             "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
             {
                 maxZoom: 19,
-
                 attribution:
                     "&copy; OpenStreetMap contributors"
             }
         ).addTo(map);
     }
 
-
     if (locationMarker) {
 
         locationMarker.setLatLng(
-            [
-                latitude,
-                longitude
-            ]
+            [latitude, longitude]
         );
 
     } else {
 
         locationMarker =
             L.marker(
-                [
-                    latitude,
-                    longitude
-                ]
+                [latitude, longitude]
             ).addTo(map);
     }
-
 
     locationMarker
         .bindPopup(
@@ -580,27 +371,20 @@ function showLocationOnMap(
         )
         .openPopup();
 
-
     map.setView(
-        [
-            latitude,
-            longitude
-        ],
+        [latitude, longitude],
         16
     );
 
-
     setTimeout(function () {
-
         map.invalidateSize();
-
     }, 100);
 }
 
 
-// =====================================================
-// 14. NEARBY HOSPITALS + POLICE
-// =====================================================
+// ==============================
+// NEARBY HOSPITALS + POLICE
+// ==============================
 
 async function findNearbyServices(
     latitude,
@@ -612,17 +396,14 @@ async function findNearbyServices(
             "nearby-services"
         );
 
-
     if (!nearbyBox) {
         return;
     }
-
 
     nearbyBox.innerHTML =
         hindiMode
             ? "<p>नज़दीकी आपातकालीन सेवाएँ खोजी जा रही हैं...</p>"
             : "<p>Finding nearby emergency services...</p>";
-
 
     nearbyMarkers.forEach(function (marker) {
 
@@ -631,9 +412,7 @@ async function findNearbyServices(
         }
     });
 
-
     nearbyMarkers = [];
-
 
     let query = `
         [out:json][timeout:25];
@@ -644,38 +423,28 @@ async function findNearbyServices(
         out center;
     `;
 
-
     let url =
         "https://overpass-api.de/api/interpreter?data=" +
         encodeURIComponent(query);
-
 
     try {
 
         let response =
             await fetch(url);
 
-
         if (!response.ok) {
-
             throw new Error(
-                "Nearby service error: " +
+                "Overpass error: " +
                 response.status
             );
         }
 
-
         let data =
             await response.json();
 
-
         nearbyBox.innerHTML = "";
 
-
-        if (
-            !data.elements ||
-            data.elements.length === 0
-        ) {
+        if (!data.elements || data.elements.length === 0) {
 
             nearbyBox.innerHTML =
                 hindiMode
@@ -685,16 +454,13 @@ async function findNearbyServices(
             return;
         }
 
-
         data.elements.forEach(function (place) {
 
             let tags =
                 place.tags || {};
 
-
             let type =
                 tags.amenity;
-
 
             let name =
                 tags.name ||
@@ -704,7 +470,6 @@ async function findNearbyServices(
                         : "Unnamed Police Station"
                 );
 
-
             let placeLat =
                 place.lat ||
                 (
@@ -712,7 +477,6 @@ async function findNearbyServices(
                         ? place.center.lat
                         : null
                 );
-
 
             let placeLon =
                 place.lon ||
@@ -722,7 +486,6 @@ async function findNearbyServices(
                         : null
                 );
 
-
             if (
                 placeLat === null ||
                 placeLon === null
@@ -730,81 +493,59 @@ async function findNearbyServices(
                 return;
             }
 
-
             let card =
                 document.createElement("div");
-
 
             card.className =
                 "nearby-card";
 
-
-            let heading =
+            let title =
                 document.createElement("h4");
 
-
-            let description =
+            let desc =
                 document.createElement("p");
-
 
             if (type === "hospital") {
 
-                heading.innerText =
+                title.innerText =
                     "🏥 " + name;
 
-
-                description.innerText =
+                desc.innerText =
                     hindiMode
                         ? "अस्पताल"
                         : "Hospital";
 
             } else {
 
-                heading.innerText =
+                title.innerText =
                     "🚓 " + name;
 
-
-                description.innerText =
+                desc.innerText =
                     hindiMode
                         ? "पुलिस स्टेशन"
                         : "Police Station";
             }
 
+            card.appendChild(title);
+            card.appendChild(desc);
 
-            card.appendChild(
-                heading
-            );
-
-
-            card.appendChild(
-                description
-            );
-
-
-            nearbyBox.appendChild(
-                card
-            );
-
+            nearbyBox.appendChild(card);
 
             if (map) {
 
                 let marker =
-                    L.marker(
-                        [
-                            placeLat,
-                            placeLon
-                        ]
-                    )
+                    L.marker([
+                        placeLat,
+                        placeLon
+                    ])
                     .addTo(map)
                     .bindPopup(
                         (
                             type === "hospital"
                                 ? "🏥 "
                                 : "🚓 "
-                        ) +
-                        name
+                        ) + name
                     );
-
 
                 nearbyMarkers.push(marker);
             }
@@ -817,7 +558,6 @@ async function findNearbyServices(
             error
         );
 
-
         nearbyBox.innerHTML =
             hindiMode
                 ? "<p>नज़दीकी सेवाएँ अभी लोड नहीं हो सकीं।</p>"
@@ -826,44 +566,25 @@ async function findNearbyServices(
 }
 
 
-// =====================================================
-// 15. ALERTS PANEL
-// =====================================================
+// ==============================
+// ALERTS
+// ==============================
 
 function openAlertsPanel() {
 
     closeAllPanels();
 
-
-    let panel =
-        document.getElementById(
-            "alerts-panel"
-        );
-
-
-    if (panel) {
-        panel.classList.add("panel-open");
-    }
+    document
+        .getElementById("alerts-panel")
+        .classList.add("panel-open");
 }
-
 
 function closeAlertsPanel() {
 
-    let panel =
-        document.getElementById(
-            "alerts-panel"
-        );
-
-
-    if (panel) {
-        panel.classList.remove("panel-open");
-    }
+    document
+        .getElementById("alerts-panel")
+        .classList.remove("panel-open");
 }
-
-
-// =====================================================
-// 16. SOS HISTORY
-// =====================================================
 
 function loadSOSHistory() {
 
@@ -875,93 +596,64 @@ function loadSOSHistory() {
 }
 
 
-// =====================================================
-// 17. EMERGENCY PANEL
-// =====================================================
+// ==============================
+// EMERGENCY PANEL
+// ==============================
 
 function openEmergencyPanel() {
 
     closeAllPanels();
 
-
-    let panel =
-        document.getElementById(
-            "emergency-panel"
-        );
-
-
-    if (panel) {
-        panel.classList.add("panel-open");
-    }
+    document
+        .getElementById("emergency-panel")
+        .classList.add("panel-open");
 }
-
 
 function closeEmergencyPanel() {
 
-    let panel =
-        document.getElementById(
-            "emergency-panel"
-        );
-
-
-    if (panel) {
-        panel.classList.remove("panel-open");
-    }
+    document
+        .getElementById("emergency-panel")
+        .classList.remove("panel-open");
 }
 
 
-// =====================================================
-// 18. DIGITAL TWIN PANEL
-// =====================================================
+// ==============================
+// DIGITAL TWIN
+// ==============================
 
 function openDigitalTwinPanel() {
 
     closeAllPanels();
 
-
-    let panel =
-        document.getElementById(
+    document
+        .getElementById(
             "digital-twin-panel"
-        );
-
-
-    if (panel) {
-        panel.classList.add("panel-open");
-    }
+        )
+        .classList.add("panel-open");
 }
-
 
 function closeDigitalTwinPanel() {
 
-    let panel =
-        document.getElementById(
+    document
+        .getElementById(
             "digital-twin-panel"
-        );
-
-
-    if (panel) {
-        panel.classList.remove("panel-open");
-    }
+        )
+        .classList.remove("panel-open");
 }
 
 
-// =====================================================
-// 19. EMERGENCY SIREN
-// =====================================================
+// ==============================
+// EMERGENCY SIREN
+// ==============================
 
 let audioContext = null;
-
 let sirenOscillator = null;
-
 let sirenGain = null;
-
 let sirenInterval = null;
-
 
 function playAlarmSound() {
 
     stopAlarmSound();
-
 
     try {
 
@@ -969,55 +661,39 @@ function playAlarmSound() {
             window.AudioContext ||
             window.webkitAudioContext;
 
-
         audioContext =
             new AudioContextClass();
 
-
-        if (
-            audioContext.state === "suspended"
-        ) {
-
+        if (audioContext.state === "suspended") {
             audioContext.resume();
         }
-
 
         sirenOscillator =
             audioContext.createOscillator();
 
-
         sirenGain =
             audioContext.createGain();
-
 
         sirenOscillator.type =
             "sawtooth";
 
-
         sirenGain.gain.value =
             0.12;
-
 
         sirenOscillator.connect(
             sirenGain
         );
 
-
         sirenGain.connect(
             audioContext.destination
         );
 
-
         sirenOscillator.frequency.value =
             700;
 
-
         sirenOscillator.start();
 
-
-        let highTone =
-            false;
-
+        let highTone = false;
 
         sirenInterval =
             setInterval(function () {
@@ -1029,30 +705,23 @@ function playAlarmSound() {
                     return;
                 }
 
-
                 let target =
                     highTone
                         ? 700
                         : 1100;
 
-
-                sirenOscillator
-                    .frequency
+                sirenOscillator.frequency
                     .cancelScheduledValues(
                         audioContext.currentTime
                     );
 
-
-                sirenOscillator
-                    .frequency
+                sirenOscillator.frequency
                     .linearRampToValueAtTime(
                         target,
                         audioContext.currentTime + 0.35
                     );
 
-
-                highTone =
-                    !highTone;
+                highTone = !highTone;
 
             }, 400);
 
@@ -1060,3 +729,472 @@ function playAlarmSound() {
 
         console.error(
             "Siren error:",
+            error
+        );
+    }
+}
+
+function stopAlarmSound() {
+
+    if (sirenInterval) {
+
+        clearInterval(
+            sirenInterval
+        );
+
+        sirenInterval = null;
+    }
+
+    if (sirenOscillator) {
+
+        try {
+            sirenOscillator.stop();
+        } catch (error) {}
+
+        sirenOscillator = null;
+    }
+
+    if (audioContext) {
+
+        try {
+            audioContext.close();
+        } catch (error) {}
+
+        audioContext = null;
+    }
+
+    sirenGain = null;
+}
+
+
+// ==============================
+// EMERGENCY FLOW
+// ==============================
+
+let countdownInterval = null;
+let emergencySeconds = 10;
+let currentEmergencyType = "";
+
+function sendSOS() {
+    startEmergency("sos");
+}
+
+function simulateFall() {
+    startEmergency("fall");
+}
+
+function startEmergency(type) {
+
+    currentEmergencyType =
+        type;
+
+    emergencySeconds =
+        10;
+
+    let popup =
+        document.getElementById(
+            "emergency-popup"
+        );
+
+    let title =
+        document.getElementById(
+            "emergency-title"
+        );
+
+    let countdown =
+        document.getElementById(
+            "countdown"
+        );
+
+    if (
+        !popup ||
+        !title ||
+        !countdown
+    ) {
+
+        console.error(
+            "Emergency popup elements missing."
+        );
+
+        return;
+    }
+
+    if (type === "fall") {
+
+        title.innerText =
+            hindiMode
+                ? "⚠️ गिरने का पता चला!"
+                : "⚠️ Fall Detected!";
+
+    } else {
+
+        title.innerText =
+            hindiMode
+                ? "🚨 SOS सक्रिय हुआ!"
+                : "🚨 SOS Activated!";
+    }
+
+    countdown.innerText =
+        emergencySeconds;
+
+    popup.style.display =
+        "flex";
+
+    playAlarmSound();
+
+    if (countdownInterval) {
+
+        clearInterval(
+            countdownInterval
+        );
+
+        countdownInterval = null;
+    }
+
+    countdownInterval =
+        setInterval(function () {
+
+            emergencySeconds--;
+
+            countdown.innerText =
+                emergencySeconds;
+
+            console.log(
+                "Countdown:",
+                emergencySeconds
+            );
+
+            if (
+                emergencySeconds <= 0
+            ) {
+
+                clearInterval(
+                    countdownInterval
+                );
+
+                countdownInterval =
+                    null;
+
+                callEmergencyContacts(
+                    true
+                );
+            }
+
+        }, 1000);
+}
+
+function userIsOkay() {
+
+    if (countdownInterval) {
+
+        clearInterval(
+            countdownInterval
+        );
+
+        countdownInterval =
+            null;
+    }
+
+    stopAlarmSound();
+
+    document.getElementById(
+        "emergency-popup"
+    ).style.display =
+        "none";
+
+    alert(
+        hindiMode
+            ? "आपातकालीन अनुरोध रद्द कर दिया गया।"
+            : "Emergency request cancelled."
+    );
+}
+
+function callEmergencyContacts(
+    automatic = false
+) {
+
+    if (countdownInterval) {
+
+        clearInterval(
+            countdownInterval
+        );
+
+        countdownInterval =
+            null;
+    }
+
+    stopAlarmSound();
+
+    document.getElementById(
+        "emergency-popup"
+    ).style.display =
+        "none";
+
+    if (!navigator.geolocation) {
+
+        sendEmergencyToBackend(
+            null,
+            null,
+            automatic
+        );
+
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function (position) {
+
+            sendEmergencyToBackend(
+                position.coords.latitude,
+                position.coords.longitude,
+                automatic
+            );
+        },
+
+        function () {
+
+            sendEmergencyToBackend(
+                null,
+                null,
+                automatic
+            );
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        }
+    );
+}
+
+function sendEmergencyToBackend(
+    latitude,
+    longitude,
+    automatic
+) {
+
+    console.log(
+        "Emergency Type:",
+        currentEmergencyType
+    );
+
+    console.log(
+        "Latitude:",
+        latitude
+    );
+
+    console.log(
+        "Longitude:",
+        longitude
+    );
+
+    console.log(
+        "Automatic:",
+        automatic
+    );
+
+    alert(
+        automatic
+            ? (
+                hindiMode
+                    ? "10 सेकंड में कोई प्रतिक्रिया नहीं मिली। आपातकाल आगे बढ़ाया गया।"
+                    : "No response within 10 seconds. Emergency escalated."
+            )
+            : (
+                hindiMode
+                    ? "आपातकालीन अनुरोध शुरू किया गया।"
+                    : "Emergency request initiated."
+            )
+    );
+}
+
+
+// ==============================
+// CHATBOT
+// ==============================
+
+function openChatbot() {
+
+    closeAllPanels();
+
+    document.getElementById(
+        "chatbot-container"
+    ).style.display =
+        "flex";
+}
+
+function closeChatbot() {
+
+    document.getElementById(
+        "chatbot-container"
+    ).style.display =
+        "none";
+}
+
+function toggleChatbot() {
+
+    let chatbot =
+        document.getElementById(
+            "chatbot-container"
+        );
+
+    if (
+        chatbot.style.display === "flex"
+    ) {
+        closeChatbot();
+    } else {
+        openChatbot();
+    }
+}
+
+function sendChatMessage() {
+
+    let input =
+        document.getElementById(
+            "chat-input"
+        );
+
+    let message =
+        input.value.trim();
+
+    if (message === "") {
+        return;
+    }
+
+    addUserMessage(message);
+
+    input.value = "";
+
+    setTimeout(function () {
+
+        addBotMessage(
+            hindiMode
+                ? "मैं अभी डेमो मोड में हूँ। Gemini इंटीग्रेशन बैकएंड से किया जाएगा।"
+                : "I'm currently in demo mode. Gemini will be connected through the backend."
+        );
+
+    }, 500);
+}
+
+function addUserMessage(message) {
+
+    let chatMessages =
+        document.getElementById(
+            "chat-messages"
+        );
+
+    let messageDiv =
+        document.createElement(
+            "div"
+        );
+
+    messageDiv.className =
+        "user-message";
+
+    let bubble =
+        document.createElement(
+            "div"
+        );
+
+    bubble.className =
+        "message-bubble";
+
+    let text =
+        document.createElement(
+            "p"
+        );
+
+    text.innerText =
+        message;
+
+    bubble.appendChild(text);
+
+    messageDiv.appendChild(bubble);
+
+    chatMessages.appendChild(
+        messageDiv
+    );
+
+    scrollChatToBottom();
+}
+
+function addBotMessage(message) {
+
+    let chatMessages =
+        document.getElementById(
+            "chat-messages"
+        );
+
+    let messageDiv =
+        document.createElement(
+            "div"
+        );
+
+    messageDiv.className =
+        "bot-message";
+
+    let avatar =
+        document.createElement(
+            "div"
+        );
+
+    avatar.className =
+        "message-avatar";
+
+    avatar.innerText =
+        "🤖";
+
+    let bubble =
+        document.createElement(
+            "div"
+        );
+
+    bubble.className =
+        "message-bubble";
+
+    let text =
+        document.createElement(
+            "p"
+        );
+
+    text.innerText =
+        message;
+
+    bubble.appendChild(
+        text
+    );
+
+    messageDiv.appendChild(
+        avatar
+    );
+
+    messageDiv.appendChild(
+        bubble
+    );
+
+    chatMessages.appendChild(
+        messageDiv
+    );
+
+    scrollChatToBottom();
+}
+
+function handleChatEnter(event) {
+
+    if (event.key === "Enter") {
+        sendChatMessage();
+    }
+}
+
+function scrollChatToBottom() {
+
+    let chatMessages =
+        document.getElementById(
+            "chat-messages"
+        );
+
+    chatMessages.scrollTop =
+        chatMessages.scrollHeight;
+}
