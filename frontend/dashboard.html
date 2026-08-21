@@ -12,22 +12,37 @@
 
     <title>Saathi - Smart Safety Companion</title>
 
-    <!-- Main CSS -->
+
+    <!-- MAIN CSS -->
+
     <link
         rel="stylesheet"
         href="dashboard.css"
     >
 
-    <!-- Leaflet CSS -->
+
+    <!-- LEAFLET CSS -->
+
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     >
 
-    <!-- Leaflet JS -->
+
+    <!-- LEAFLET JS -->
+
     <script
-        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-    </script>
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        defer
+    ></script>
+
+
+    <!-- DASHBOARD JS -->
+
+    <script
+        src="dashboard.js"
+        defer
+    ></script>
 
 </head>
 
@@ -35,9 +50,9 @@
 <body>
 
 
-<!-- ===================================== -->
+<!-- ================================================= -->
 <!-- SIDEBAR -->
-<!-- ===================================== -->
+<!-- ================================================= -->
 
 <aside class="sidebar">
 
@@ -48,7 +63,10 @@
         </div>
 
         <div>
-            <h2>Saathi</h2>
+
+            <h2>
+                Saathi
+            </h2>
 
             <p
                 data-en="Smart Safety Companion"
@@ -56,19 +74,29 @@
             >
                 Smart Safety Companion
             </p>
+
         </div>
 
     </div>
 
 
+
+    <!-- NAVIGATION -->
+
     <nav class="sidebar-nav">
+
+
+        <!-- DASHBOARD -->
 
         <a
             href="#"
             class="active"
             onclick="showDashboard(); return false;"
         >
-            <span>🏠</span>
+
+            <span>
+                🏠
+            </span>
 
             <span
                 data-en="Dashboard"
@@ -76,14 +104,21 @@
             >
                 Dashboard
             </span>
+
         </a>
 
+
+
+        <!-- EMERGENCY -->
 
         <a
             href="#"
             onclick="openEmergencyPanel(); return false;"
         >
-            <span>🚨</span>
+
+            <span>
+                🚨
+            </span>
 
             <span
                 data-en="Emergency"
@@ -91,14 +126,21 @@
             >
                 Emergency
             </span>
+
         </a>
 
 
+
+        <!-- DIGITAL TWIN -->
+
         <a
-    href="#"
-    onclick="openDigitalTwinPanel(); return false;"
->
-            <span>🧠</span>
+            href="#"
+            onclick="openDigitalTwinPanel(); return false;"
+        >
+
+            <span>
+                🧠
+            </span>
 
             <span
                 data-en="Digital Twin"
@@ -106,14 +148,21 @@
             >
                 Digital Twin
             </span>
+
         </a>
 
 
+
+        <!-- AI ASSISTANT -->
+
         <a
             href="#"
-            onclick="openChatbot(); return false;"
+            onclick="toggleChatbot(); return false;"
         >
-            <span>🤖</span>
+
+            <span>
+                🤖
+            </span>
 
             <span
                 data-en="AI Assistant"
@@ -121,14 +170,21 @@
             >
                 AI Assistant
             </span>
+
         </a>
 
+
+
+        <!-- LOCATION -->
 
         <a
             href="#"
             onclick="openLocationPanel(); return false;"
         >
-            <span>📍</span>
+
+            <span>
+                📍
+            </span>
 
             <span
                 data-en="Location"
@@ -136,14 +192,21 @@
             >
                 Location
             </span>
+
         </a>
 
+
+
+        <!-- ALERTS -->
 
         <a
             href="#"
             onclick="openAlertsPanel(); return false;"
         >
-            <span>🔔</span>
+
+            <span>
+                🔔
+            </span>
 
             <span
                 data-en="Alerts"
@@ -151,14 +214,21 @@
             >
                 Alerts
             </span>
+
         </a>
 
+
+
+        <!-- FAMILY -->
 
         <a
             href="#"
             onclick="openFamilyPanel(); return false;"
         >
-            <span>👨‍👩‍👧</span>
+
+            <span>
+                👨‍👩‍👧
+            </span>
 
             <span
                 data-en="Family"
@@ -166,18 +236,26 @@
             >
                 Family
             </span>
+
         </a>
 
     </nav>
 
 
+
+    <!-- LOGOUT -->
+
     <div class="sidebar-bottom">
 
         <button
+            type="button"
             class="logout-button"
             onclick="logout()"
         >
-            <span>↪</span>
+
+            <span>
+                ↪
+            </span>
 
             <span
                 data-en="Logout"
@@ -185,6 +263,7 @@
             >
                 Logout
             </span>
+
         </button>
 
     </div>
@@ -193,9 +272,9 @@
 
 
 
-<!-- ===================================== -->
+<!-- ================================================= -->
 <!-- MAIN DASHBOARD -->
-<!-- ===================================== -->
+<!-- ================================================= -->
 
 <main class="main-content">
 
@@ -214,7 +293,9 @@
                 WELCOME BACK
             </p>
 
+
             <h1>
+
                 <span
                     data-en="Hello,"
                     data-hi="नमस्ते,"
@@ -225,16 +306,20 @@
                 <span id="user-name">
                     User
                 </span>
+
             </h1>
 
         </div>
 
 
+
         <div class="top-actions">
 
-            <!-- LANGUAGE -->
+
+            <!-- LANGUAGE BUTTON -->
 
             <button
+                type="button"
                 id="language-button"
                 class="top-button"
                 onclick="changeLanguage()"
@@ -243,15 +328,18 @@
             </button>
 
 
-            <!-- THEME -->
+
+            <!-- THEME BUTTON -->
 
             <button
+                type="button"
                 id="theme-button"
                 class="top-button theme-button"
                 onclick="toggleTheme()"
             >
                 ☀️
             </button>
+
 
 
             <!-- PROFILE -->
@@ -266,9 +354,9 @@
 
 
 
-    <!-- ================================= -->
+    <!-- ================================================= -->
     <!-- SAFETY HERO -->
-    <!-- ================================= -->
+    <!-- ================================================= -->
 
     <section class="safety-hero">
 
@@ -277,6 +365,7 @@
             <div class="safe-icon">
                 🛡️
             </div>
+
 
             <div>
 
@@ -287,12 +376,14 @@
                     CURRENT SAFETY STATUS
                 </p>
 
+
                 <h2
                     data-en="You're Safe"
                     data-hi="आप सुरक्षित हैं"
                 >
                     You're Safe
                 </h2>
+
 
                 <span
                     data-en="Saathi is ready to assist you."
@@ -306,6 +397,9 @@
         </div>
 
 
+
+        <!-- MAIN SOS -->
+
         <div class="hero-sos">
 
             <p
@@ -315,7 +409,9 @@
                 NEED HELP?
             </p>
 
+
             <button
+                type="button"
                 class="main-sos-button"
                 onclick="sendSOS()"
             >
@@ -328,9 +424,9 @@
 
 
 
-    <!-- ================================= -->
+    <!-- ================================================= -->
     <!-- QUICK ACTIONS -->
-    <!-- ================================= -->
+    <!-- ================================================= -->
 
     <section class="dashboard-section">
 
@@ -345,6 +441,7 @@
                     SAFETY SERVICES
                 </p>
 
+
                 <h2
                     data-en="Quick Actions"
                     data-hi="त्वरित कार्य"
@@ -355,6 +452,7 @@
             </div>
 
         </div>
+
 
 
         <div class="feature-grid">
@@ -368,12 +466,14 @@
                     🚶
                 </div>
 
+
                 <h3
                     data-en="Fall Detection"
                     data-hi="गिरने की पहचान"
                 >
                     Fall Detection
                 </h3>
+
 
                 <p
                     data-en="Test the emergency response using simulated fall detection."
@@ -382,7 +482,9 @@
                     Test the emergency response using simulated fall detection.
                 </p>
 
+
                 <button
+                    type="button"
                     onclick="simulateFall()"
                     data-en="Simulate Fall →"
                     data-hi="गिरने का परीक्षण करें →"
@@ -394,13 +496,14 @@
 
 
 
-            <!-- LOCATION -->
+            <!-- LIVE LOCATION -->
 
             <div class="feature-card">
 
                 <div class="feature-icon">
                     📍
                 </div>
+
 
                 <h3
                     data-en="Live Location"
@@ -409,6 +512,7 @@
                     Live Location
                 </h3>
 
+
                 <p
                     data-en="View your current location for emergency assistance."
                     data-hi="आपातकालीन सहायता के लिए अपना वर्तमान स्थान देखें।"
@@ -416,7 +520,9 @@
                     View your current location for emergency assistance.
                 </p>
 
+
                 <button
+                    type="button"
                     onclick="openLocationPanel()"
                     data-en="View Location →"
                     data-hi="स्थान देखें →"
@@ -428,13 +534,14 @@
 
 
 
-            <!-- FAMILY -->
+            <!-- EMERGENCY CONTACTS -->
 
             <div class="feature-card">
 
                 <div class="feature-icon">
                     👨‍👩‍👧
                 </div>
+
 
                 <h3
                     data-en="Emergency Contacts"
@@ -443,6 +550,7 @@
                     Emergency Contacts
                 </h3>
 
+
                 <p
                     data-en="Manage trusted contacts for emergency situations."
                     data-hi="आपातकालीन स्थिति के लिए विश्वसनीय संपर्क प्रबंधित करें।"
@@ -450,7 +558,9 @@
                     Manage trusted contacts for emergency situations.
                 </p>
 
+
                 <button
+                    type="button"
                     onclick="openFamilyPanel()"
                     data-en="Manage Contacts →"
                     data-hi="संपर्क प्रबंधित करें →"
@@ -462,13 +572,14 @@
 
 
 
-            <!-- ALERTS -->
+            <!-- EMERGENCY HISTORY -->
 
             <div class="feature-card">
 
                 <div class="feature-icon">
                     🔔
                 </div>
+
 
                 <h3
                     data-en="Emergency History"
@@ -477,6 +588,7 @@
                     Emergency History
                 </h3>
 
+
                 <p
                     data-en="View previous SOS and emergency events."
                     data-hi="पिछले SOS और आपातकालीन घटनाएँ देखें।"
@@ -484,7 +596,9 @@
                     View previous SOS and emergency events.
                 </p>
 
+
                 <button
+                    type="button"
                     onclick="openAlertsPanel()"
                     data-en="View History →"
                     data-hi="इतिहास देखें →"
@@ -494,16 +608,15 @@
 
             </div>
 
-
         </div>
 
     </section>
 
 
 
-    <!-- ================================= -->
+    <!-- ================================================= -->
     <!-- USER PROFILE -->
-    <!-- ================================= -->
+    <!-- ================================================= -->
 
     <section class="dashboard-section">
 
@@ -518,6 +631,7 @@
                     YOUR ACCOUNT
                 </p>
 
+
                 <h2
                     data-en="Profile"
                     data-hi="प्रोफ़ाइल"
@@ -530,7 +644,9 @@
         </div>
 
 
+
         <div class="profile-card">
+
 
             <div class="profile-item">
 
@@ -546,6 +662,7 @@
                 </strong>
 
             </div>
+
 
 
             <div class="profile-item">
@@ -564,6 +681,7 @@
             </div>
 
 
+
             <div class="profile-item">
 
                 <span
@@ -578,6 +696,7 @@
                 </strong>
 
             </div>
+
 
 
             <div class="profile-item">
@@ -618,9 +737,11 @@
             🚨
         </div>
 
+
         <h2 id="emergency-title">
             Emergency Detected!
         </h2>
+
 
         <h3
             data-en="Are you okay?"
@@ -628,6 +749,7 @@
         >
             Are you okay?
         </h3>
+
 
         <p
             data-en="If you don't respond within 10 seconds, your emergency contacts will be contacted automatically."
@@ -637,9 +759,11 @@
             your emergency contacts will be contacted automatically.
         </p>
 
+
         <div id="countdown">
             10
         </div>
+
 
         <p
             class="timer-text"
@@ -651,6 +775,7 @@
 
 
         <button
+            type="button"
             class="safe-button"
             onclick="userIsOkay()"
             data-en="✓ Yes, I'm Okay"
@@ -661,6 +786,7 @@
 
 
         <button
+            type="button"
             class="call-button"
             onclick="callEmergencyContacts()"
             data-en="📞 Call Emergency Contacts"
@@ -695,6 +821,7 @@
                 SAATHI FAMILY
             </p>
 
+
             <h2
                 data-en="Family & Emergency Contacts"
                 data-hi="परिवार और आपातकालीन संपर्क"
@@ -705,11 +832,15 @@
         </div>
 
 
-        <button onclick="closeFamilyPanel()">
+        <button
+            type="button"
+            onclick="closeFamilyPanel()"
+        >
             ✕
         </button>
 
     </div>
+
 
 
     <div class="panel-content">
@@ -724,12 +855,14 @@
                 👨‍👩‍👧
             </div>
 
+
             <h3
                 data-en="No Emergency Contacts"
                 data-hi="कोई आपातकालीन संपर्क नहीं"
             >
                 No Emergency Contacts
             </h3>
+
 
             <p
                 data-en="Add trusted family members who should be contacted during an emergency."
@@ -742,7 +875,9 @@
         </div>
 
 
+
         <button
+            type="button"
             class="primary-panel-button"
             onclick="showContactForm()"
             data-en="+ Add Emergency Contact"
@@ -753,7 +888,7 @@
 
 
 
-        <!-- ADD CONTACT FORM -->
+        <!-- CONTACT FORM -->
 
         <div
             id="contact-form"
@@ -769,11 +904,13 @@
 
 
             <label
+                for="contact-name"
                 data-en="Name"
                 data-hi="नाम"
             >
                 Name
             </label>
+
 
             <input
                 type="text"
@@ -783,11 +920,13 @@
 
 
             <label
+                for="contact-phone"
                 data-en="Phone Number"
                 data-hi="फ़ोन नंबर"
             >
                 Phone Number
             </label>
+
 
             <input
                 type="tel"
@@ -797,6 +936,7 @@
 
 
             <label
+                for="contact-relation"
                 data-en="Relation"
                 data-hi="रिश्ता"
             >
@@ -841,9 +981,11 @@
             </select>
 
 
+
             <div class="form-buttons">
 
                 <button
+                    type="button"
                     class="secondary-button"
                     onclick="hideContactForm()"
                     data-en="Cancel"
@@ -854,6 +996,7 @@
 
 
                 <button
+                    type="button"
                     class="primary-button"
                     onclick="saveEmergencyContact()"
                     data-en="Save Contact"
@@ -867,7 +1010,6 @@
         </div>
 
 
-        <!-- BACKEND CONTACTS -->
 
         <div
             id="contacts-list"
@@ -901,6 +1043,7 @@
                 SAATHI LOCATION
             </p>
 
+
             <h2
                 data-en="📍 Live Location"
                 data-hi="📍 लाइव स्थान"
@@ -911,11 +1054,15 @@
         </div>
 
 
-        <button onclick="closeLocationPanel()">
+        <button
+            type="button"
+            onclick="closeLocationPanel()"
+        >
             ✕
         </button>
 
     </div>
+
 
 
     <div class="panel-content">
@@ -927,6 +1074,7 @@
                 📍
             </div>
 
+
             <div>
 
                 <p
@@ -935,6 +1083,7 @@
                 >
                     Current Location
                 </p>
+
 
                 <h3 id="location-status">
                     Location not loaded
@@ -945,7 +1094,9 @@
         </div>
 
 
+
         <button
+            type="button"
             class="primary-panel-button"
             onclick="getCurrentLocation()"
             data-en="📍 Get My Current Location"
@@ -955,30 +1106,13 @@
         </button>
 
 
+
         <div id="map"></div>
-        <div class="nearby-section">
 
-    <h3
-        data-en="Nearby Emergency Services"
-        data-hi="नज़दीकी आपातकालीन सेवाएँ"
-    >
-        Nearby Emergency Services
-    </h3>
 
-    <div id="nearby-services">
-
-        <p
-            data-en="Get your location to find nearby hospitals and police stations."
-            data-hi="नज़दीकी अस्पताल और पुलिस स्टेशन खोजने के लिए अपना स्थान प्राप्त करें।"
-        >
-            Get your location to find nearby hospitals and police stations.
-        </p>
-
-    </div>
-
-</div>
 
         <div class="coordinate-grid">
+
 
             <div>
 
@@ -994,6 +1128,7 @@
                 </strong>
 
             </div>
+
 
 
             <div>
@@ -1039,6 +1174,7 @@
                 SAATHI SAFETY
             </p>
 
+
             <h2
                 data-en="🔔 Emergency History"
                 data-hi="🔔 आपातकालीन इतिहास"
@@ -1049,17 +1185,22 @@
         </div>
 
 
-        <button onclick="closeAlertsPanel()">
+        <button
+            type="button"
+            onclick="closeAlertsPanel()"
+        >
             ✕
         </button>
 
     </div>
 
 
+
     <div class="panel-content">
 
 
         <div class="summary-grid">
+
 
             <div class="summary-card">
 
@@ -1075,6 +1216,7 @@
                 </h2>
 
             </div>
+
 
 
             <div class="summary-card">
@@ -1095,6 +1237,7 @@
         </div>
 
 
+
         <div class="history-heading">
 
             <div>
@@ -1105,6 +1248,7 @@
                 >
                     EMERGENCY LOG
                 </p>
+
 
                 <h3
                     data-en="Recent Alerts"
@@ -1117,6 +1261,7 @@
 
 
             <button
+                type="button"
                 onclick="loadSOSHistory()"
                 data-en="↻ Refresh"
                 data-hi="↻ रीफ़्रेश"
@@ -1125,6 +1270,7 @@
             </button>
 
         </div>
+
 
 
         <div
@@ -1136,12 +1282,14 @@
                 🛡️
             </div>
 
+
             <h3
                 data-en="No Emergency History"
                 data-hi="कोई आपातकालीन इतिहास नहीं"
             >
                 No Emergency History
             </h3>
+
 
             <p
                 data-en="Your previous SOS and emergency events will appear here."
@@ -1152,6 +1300,7 @@
             </p>
 
         </div>
+
 
 
         <div
@@ -1167,7 +1316,7 @@
 
 
 <!-- ================================================= -->
-<!-- EMERGENCY CENTER PANEL -->
+<!-- EMERGENCY CENTER -->
 <!-- ================================================= -->
 
 <div
@@ -1187,6 +1336,7 @@
                 SAATHI EMERGENCY CENTER
             </p>
 
+
             <h2
                 data-en="🚨 Emergency Center"
                 data-hi="🚨 आपातकालीन केंद्र"
@@ -1197,11 +1347,15 @@
         </div>
 
 
-        <button onclick="closeEmergencyPanel()">
+        <button
+            type="button"
+            onclick="closeEmergencyPanel()"
+        >
             ✕
         </button>
 
     </div>
+
 
 
     <div class="panel-content">
@@ -1213,6 +1367,7 @@
                 🛡️
             </div>
 
+
             <div>
 
                 <p
@@ -1221,6 +1376,7 @@
                 >
                     Current Status
                 </p>
+
 
                 <h3
                     class="safe-text"
@@ -1250,12 +1406,14 @@
                     MANUAL EMERGENCY
                 </p>
 
+
                 <h3
                     data-en="Emergency SOS"
                     data-hi="आपातकालीन SOS"
                 >
                     Emergency SOS
                 </h3>
+
 
                 <p
                     data-en="Use SOS if you need immediate help."
@@ -1268,6 +1426,7 @@
 
 
             <button
+                type="button"
                 class="small-sos-button"
                 onclick="sendSOS()"
             >
@@ -1278,7 +1437,7 @@
 
 
 
-        <!-- FALL -->
+        <!-- FALL DETECTION -->
 
         <div class="emergency-action">
 
@@ -1292,12 +1451,14 @@
                     DETECTION DEMO
                 </p>
 
+
                 <h3
                     data-en="Fall Detection"
                     data-hi="गिरने की पहचान"
                 >
                     Fall Detection
                 </h3>
+
 
                 <p
                     data-en="Test the emergency confirmation flow using simulated fall detection."
@@ -1311,6 +1472,7 @@
 
 
             <button
+                type="button"
                 class="fall-button"
                 onclick="simulateFall()"
                 data-en="Simulate Fall"
@@ -1323,13 +1485,14 @@
 
 
 
-        <!-- LOCATION -->
+        <!-- LOCATION STATUS -->
 
         <div class="info-card">
 
             <div class="info-icon">
                 📍
             </div>
+
 
             <div>
 
@@ -1339,6 +1502,7 @@
                 >
                     Location Status
                 </p>
+
 
                 <h3 id="emergency-location-status">
                     Not checked
@@ -1350,13 +1514,14 @@
 
 
 
-        <!-- CONTACTS -->
+        <!-- CONTACT STATUS -->
 
         <div class="info-card">
 
             <div class="info-icon">
                 👨‍👩‍👧
             </div>
+
 
             <div>
 
@@ -1367,11 +1532,12 @@
                     Emergency Contacts
                 </p>
 
+
                 <h3
-                    data-en="Backend integration pending"
-                    data-hi="बैकएंड इंटीग्रेशन बाकी है"
+                    data-en="Ready for emergency alerts"
+                    data-hi="आपातकालीन अलर्ट के लिए तैयार"
                 >
-                    Backend integration pending
+                    Ready for emergency alerts
                 </h3>
 
             </div>
@@ -1389,13 +1555,13 @@
                 How it works
             </strong>
 
+
             <p
                 data-en="SOS or fall detection starts a 10-second confirmation. If there is no response, the emergency is automatically escalated."
                 data-hi="SOS या गिरने की पहचान के बाद 10 सेकंड की पुष्टि शुरू होती है। कोई प्रतिक्रिया न मिलने पर आपातकाल स्वतः आगे बढ़ाया जाता है।"
             >
-                SOS or fall detection starts a 10-second
-                confirmation. If there is no response,
-                the emergency is automatically escalated.
+                SOS or fall detection starts a 10-second confirmation.
+                If there is no response, the emergency is automatically escalated.
             </p>
 
         </div>
@@ -1407,119 +1573,18 @@
 
 
 <!-- ================================================= -->
-<!-- FLOATING SAATHI AI BUTTON -->
-<!-- ================================================= -->
-
-<button
-    id="saathi-ai-button"
-    class="saathi-ai-button"
-    onclick="toggleChatbot()"
-    title="Saathi AI"
->
-    🤖
-</button>
-
-
-
-<!-- ================================================= -->
-<!-- SAATHI AI CHATBOT -->
+<!-- DIGITAL TWIN PANEL -->
 <!-- ================================================= -->
 
 <div
-    id="chatbot-container"
-    class="chatbot-container"
+    id="digital-twin-panel"
+    class="side-panel"
 >
-
-    <div class="chatbot-header">
-
-        <div class="chatbot-title">
-
-            <div class="chatbot-avatar">
-                🤖
-            </div>
-
-            <div>
-
-                <h3>Saathi AI</h3>
-
-                <p>
-                    <span class="online-dot"></span>
-
-                    <span
-                        data-en="Online"
-                        data-hi="ऑनलाइन"
-                    >
-                        Online
-                    </span>
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <button onclick="closeChatbot()">
-            ✕
-        </button>
-
-    </div>
-
-
-
-    <div
-        id="chat-messages"
-        class="chat-messages"
-    >
-
-        <div class="bot-message">
-
-            <div class="message-avatar">
-                🤖
-            </div>
-
-            <div class="message-bubble">
-
-                <p
-                    data-en="Hello! I'm Saathi. How can I help you today?"
-                    data-hi="नमस्ते! मैं साथी हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?"
-                >
-                    Hello! I'm Saathi. How can I help you today?
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="chat-input-area">
-
-        <input
-            type="text"
-            id="chat-input"
-            placeholder="Type your message..."
-            onkeydown="handleChatEnter(event)"
-        >
-
-        <button onclick="sendChatMessage()">
-            ➤
-        </button>
-
-    </div>
-
-</div>
-
-<!-- ========================================= -->
-<!-- DIGITAL TWIN PANEL -->
-<!-- ========================================= -->
-
-<div id="digital-twin-panel" class="side-panel">
 
     <div class="panel-header">
 
         <div>
+
             <p
                 data-en="SAATHI DIGITAL TWIN"
                 data-hi="साथी डिजिटल ट्विन"
@@ -1527,22 +1592,30 @@
                 SAATHI DIGITAL TWIN
             </p>
 
+
             <h2
                 data-en="🧠 Digital Twin"
                 data-hi="🧠 डिजिटल ट्विन"
             >
                 🧠 Digital Twin
             </h2>
+
         </div>
 
-        <button onclick="closeDigitalTwinPanel()">
+
+        <button
+            type="button"
+            onclick="closeDigitalTwinPanel()"
+        >
             ✕
         </button>
 
     </div>
 
 
+
     <div class="panel-content">
+
 
         <!-- STATUS -->
 
@@ -1552,13 +1625,16 @@
                 🧠
             </div>
 
+
             <div>
+
                 <p
                     data-en="MONITORING STATUS"
                     data-hi="निगरानी स्थिति"
                 >
                     MONITORING STATUS
                 </p>
+
 
                 <h3
                     data-en="Normal Activity"
@@ -1567,15 +1643,19 @@
                     Normal Activity
                 </h3>
 
+
                 <span
                     data-en="No unusual activity detected"
                     data-hi="कोई असामान्य गतिविधि नहीं मिली"
                 >
                     No unusual activity detected
                 </span>
+
             </div>
 
+
             <div class="live-badge">
+
                 <span class="live-dot"></span>
 
                 <span
@@ -1584,12 +1664,14 @@
                 >
                     DEMO
                 </span>
+
             </div>
 
         </div>
 
 
-        <!-- DESCRIPTION -->
+
+        <!-- INFORMATION -->
 
         <div class="twin-info-box">
 
@@ -1599,6 +1681,7 @@
             >
                 What is your Digital Twin?
             </h3>
+
 
             <p
                 data-en="Saathi's Digital Twin is designed to learn a user's normal routine and help identify unusual activity patterns that may indicate a safety concern."
@@ -1612,11 +1695,13 @@
         </div>
 
 
-        <!-- TODAY ACTIVITY -->
+
+        <!-- ACTIVITY -->
 
         <div class="twin-section-heading">
 
             <div>
+
                 <p
                     data-en="TODAY"
                     data-hi="आज"
@@ -1624,18 +1709,22 @@
                     TODAY
                 </p>
 
+
                 <h3
                     data-en="Activity Overview"
                     data-hi="गतिविधि का अवलोकन"
                 >
                     Activity Overview
                 </h3>
+
             </div>
 
         </div>
 
 
+
         <div class="twin-stats-grid">
+
 
             <div class="twin-stat-card">
 
@@ -1658,6 +1747,7 @@
                 </h3>
 
             </div>
+
 
 
             <div class="twin-stat-card">
@@ -1683,6 +1773,7 @@
             </div>
 
 
+
             <div class="twin-stat-card">
 
                 <div class="twin-stat-icon">
@@ -1696,9 +1787,12 @@
                     Anomalies
                 </p>
 
-                <h3>0</h3>
+                <h3>
+                    0
+                </h3>
 
             </div>
+
 
 
             <div class="twin-stat-card">
@@ -1727,11 +1821,13 @@
         </div>
 
 
+
         <!-- ROUTINE -->
 
         <div class="twin-section-heading">
 
             <div>
+
                 <p
                     data-en="BEHAVIOUR PATTERN"
                     data-hi="व्यवहार पैटर्न"
@@ -1739,18 +1835,22 @@
                     BEHAVIOUR PATTERN
                 </p>
 
+
                 <h3
                     data-en="Daily Routine"
                     data-hi="दैनिक दिनचर्या"
                 >
                     Daily Routine
                 </h3>
+
             </div>
 
         </div>
 
 
+
         <div class="routine-timeline">
+
 
             <div class="routine-item">
 
@@ -1760,7 +1860,9 @@
                     08:00
                 </div>
 
+
                 <div class="routine-details">
+
                     <h4
                         data-en="Morning Activity"
                         data-hi="सुबह की गतिविधि"
@@ -1768,19 +1870,23 @@
                         Morning Activity
                     </h4>
 
+
                     <p
                         data-en="Normal routine pattern"
                         data-hi="सामान्य दिनचर्या पैटर्न"
                     >
                         Normal routine pattern
                     </p>
+
                 </div>
+
 
                 <span class="routine-check">
                     ✓
                 </span>
 
             </div>
+
 
 
             <div class="routine-item">
@@ -1791,7 +1897,9 @@
                     12:30
                 </div>
 
+
                 <div class="routine-details">
+
                     <h4
                         data-en="Day Activity"
                         data-hi="दिन की गतिविधि"
@@ -1799,19 +1907,23 @@
                         Day Activity
                     </h4>
 
+
                     <p
                         data-en="Expected activity"
                         data-hi="अपेक्षित गतिविधि"
                     >
                         Expected activity
                     </p>
+
                 </div>
+
 
                 <span class="routine-check">
                     ✓
                 </span>
 
             </div>
+
 
 
             <div class="routine-item">
@@ -1822,7 +1934,9 @@
                     18:00
                 </div>
 
+
                 <div class="routine-details">
+
                     <h4
                         data-en="Evening Activity"
                         data-hi="शाम की गतिविधि"
@@ -1830,13 +1944,16 @@
                         Evening Activity
                     </h4>
 
+
                     <p
                         data-en="Normal routine pattern"
                         data-hi="सामान्य दिनचर्या पैटर्न"
                     >
                         Normal routine pattern
                     </p>
+
                 </div>
+
 
                 <span class="routine-check">
                     ✓
@@ -1847,6 +1964,7 @@
         </div>
 
 
+
         <!-- ANOMALY -->
 
         <div class="anomaly-card">
@@ -1855,13 +1973,16 @@
                 🛡️
             </div>
 
+
             <div>
+
                 <p
                     data-en="ANOMALY DETECTION"
                     data-hi="असामान्यता पहचान"
                 >
                     ANOMALY DETECTION
                 </p>
+
 
                 <h3
                     data-en="Everything looks normal"
@@ -1870,30 +1991,38 @@
                     Everything looks normal
                 </h3>
 
+
                 <span
                     data-en="Saathi has not detected any unusual activity."
                     data-hi="साथी ने कोई असामान्य गतिविधि नहीं पाई है।"
                 >
                     Saathi has not detected any unusual activity.
                 </span>
+
             </div>
 
         </div>
+
 
 
         <!-- PRIVACY -->
 
         <div class="twin-privacy">
 
-            <span>🔒</span>
+            <span>
+                🔒
+            </span>
+
 
             <div>
+
                 <strong
                     data-en="Privacy First"
                     data-hi="गोपनीयता प्राथमिकता"
                 >
                     Privacy First
                 </strong>
+
 
                 <p
                     data-en="This prototype displays simulated Digital Twin data. Actual monitoring and anomaly detection are not currently active."
@@ -1903,6 +2032,7 @@
                     Actual monitoring and anomaly detection are not
                     currently active.
                 </p>
+
             </div>
 
         </div>
@@ -1911,9 +2041,132 @@
 
 </div>
 
-<!-- MAIN JAVASCRIPT -->
 
-<script src="dashboard.js"></script>
+
+<!-- ================================================= -->
+<!-- FLOATING SAATHI AI BUTTON -->
+<!-- ================================================= -->
+
+<button
+    type="button"
+    id="saathi-ai-button"
+    class="saathi-ai-button"
+    onclick="toggleChatbot()"
+    title="Saathi AI"
+>
+    🤖
+</button>
+
+
+
+<!-- ================================================= -->
+<!-- SAATHI AI CHATBOT -->
+<!-- ================================================= -->
+<div
+    id="chatbot-container"
+    class="chatbot-container"
+>
+
+    <div class="chatbot-header">
+
+        <div class="chatbot-title">
+
+            <div class="chatbot-avatar">
+                🤖
+            </div>
+
+            <div>
+                <h3>Saathi AI</h3>
+                <p>Online</p>
+            </div>
+
+        </div>
+
+        <button onclick="closeChatbot()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <iframe
+        src="http://localhost:8509"
+        class="chatbot-frame"
+    ></iframe>
+
+</div>
+
+
+    <!-- ================================================= -->
+    <!-- CHAT MESSAGES -->
+    <!-- ================================================= -->
+
+    <div
+        id="chat-messages"
+        class="chat-messages"
+    >
+
+
+        <!-- DEFAULT BOT MESSAGE -->
+
+        <div class="bot-message">
+
+            <div class="message-avatar">
+                🤖
+            </div>
+
+
+            <div class="message-bubble">
+
+                <p
+                    data-en="Hello! I'm Saathi. How can I help you today?"
+                    data-hi="नमस्ते! मैं साथी हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?"
+                >
+                    Hello! I'm Saathi. How can I help you today?
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- CHAT INPUT -->
+    <!-- ================================================= -->
+
+    <div class="chat-input-area">
+
+
+        <input
+            type="text"
+            id="chat-input"
+            placeholder="Type your message..."
+            autocomplete="off"
+            onkeydown="handleChatEnter(event)"
+        >
+
+
+        <button
+            type="button"
+            onclick="sendChatMessage()"
+            title="Send Message"
+        >
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- END OF PAGE -->
+<!-- ================================================= -->
 
 </body>
+
 </html>

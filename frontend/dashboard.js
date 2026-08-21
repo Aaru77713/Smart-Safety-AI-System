@@ -1016,38 +1016,25 @@ function sendEmergencyToBackend(
 // ==============================
 
 
+// ==============================
+// CHATBOT
+// ==============================
 
-// Streamlit chatbot URL
-const CHATBOT_URL = "http://localhost:8509";
-
-
-// Sidebar AI Assistant se chatbot open
 function openChatbot() {
 
-    window.open(
-        CHATBOT_URL,
-        "_blank"
-    );
+    let chatbot =
+        document.getElementById("chatbot-container");
+
+    if (chatbot) {
+        chatbot.style.display = "flex";
+    }
 }
 
 
-// Floating AI button se chatbot open
-function toggleChatbot() {
-
-    window.open(
-        CHATBOT_URL,
-        "_blank"
-    );
-}
-
-
-// Purane close button ke liye
 function closeChatbot() {
 
     let chatbot =
-        document.getElementById(
-            "chatbot-container"
-        );
+        document.getElementById("chatbot-container");
 
     if (chatbot) {
         chatbot.style.display = "none";
@@ -1055,24 +1042,18 @@ function closeChatbot() {
 }
 
 
-// Agar purane input ka send button click ho
-function sendChatMessage() {
+function toggleChatbot() {
 
-    window.open(
-        CHATBOT_URL,
-        "_blank"
-    );
-}
+    let chatbot =
+        document.getElementById("chatbot-container");
 
+    if (!chatbot) {
+        return;
+    }
 
-// Enter press par chatbot open
-function handleChatEnter(event) {
-
-    if (event.key === "Enter") {
-
-        window.open(
-            CHATBOT_URL,
-            "_blank"
-        );
+    if (chatbot.style.display === "flex") {
+        closeChatbot();
+    } else {
+        openChatbot();
     }
 }

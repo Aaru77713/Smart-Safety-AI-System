@@ -2811,3 +2811,11 @@ body.light-mode .nearby-card {
     background: #f7f7fa;
     border-color: #dfdfe6;
 }
+.chatbot-frame {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    background: white;
+}
