@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const Emergency = require("./models/Emergency");
 const EmergencyContact = require("./models/EmergencyContact");
@@ -9,7 +10,7 @@ const PORT = 5000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "frontend")));
 
 // MongoDB Connection
 mongoose.connect("mongodb://127.0.0.1:27017/smartSafety")
@@ -26,7 +27,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/smartSafety")
 // ===============================
 
 app.get("/", (req, res) => {
-    res.send("Smart Safety Backend is running!");
+    res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 });
 
 

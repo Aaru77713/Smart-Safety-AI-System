@@ -11,16 +11,21 @@ let currentUserEmail =
 
 // Agar login nahi hai to login page par bhejo
 if (!currentUserEmail) {
+
     window.location.href = "login.html";
 }
 
+
 // Logged-in user find karo
-let currentUser = users.find(function (user) {
-    return user.email === currentUserEmail;
-});
+let currentUser =
+    users.find(function (user) {
+
+        return user.email === currentUserEmail;
+
+    });
 
 
-// User ki information dashboard par show karo
+// User information dashboard par show karo
 if (currentUser) {
 
     document.getElementById("user-name").innerText =
@@ -49,9 +54,12 @@ if (currentUser) {
 // ==========================================
 
 function logout() {
+
     localStorage.removeItem("currentUser");
+
     window.location.href = "login.html";
 }
+
 
 
 // ==========================================
@@ -66,7 +74,11 @@ function toggleTheme() {
         document.getElementById("theme-button");
 
 
-    if (document.body.classList.contains("light-mode")) {
+    if (
+        document.body.classList.contains(
+            "light-mode"
+        )
+    ) {
 
         themeButton.innerText = "🌙";
 
@@ -110,21 +122,31 @@ function changeLanguage() {
 
 
     let languageButton =
-        document.getElementById("language-button");
+        document.getElementById(
+            "language-button"
+        );
 
 
     if (hindiMode) {
 
-        languageButton.innerText = "हिंदी / EN";
+        languageButton.innerText =
+            "हिंदी / EN";
 
-        document.getElementById("chat-input").placeholder =
+
+        document.getElementById(
+            "chat-input"
+        ).placeholder =
             "अपना संदेश लिखें...";
 
     } else {
 
-        languageButton.innerText = "EN / हिंदी";
+        languageButton.innerText =
+            "EN / हिंदी";
 
-        document.getElementById("chat-input").placeholder =
+
+        document.getElementById(
+            "chat-input"
+        ).placeholder =
             "Type your message...";
     }
 }
@@ -138,12 +160,16 @@ function changeLanguage() {
 function closeAllPanels() {
 
     let panels =
-        document.querySelectorAll(".side-panel");
+        document.querySelectorAll(
+            ".side-panel"
+        );
 
 
     panels.forEach(function (panel) {
 
-        panel.classList.remove("panel-open");
+        panel.classList.remove(
+            "panel-open"
+        );
 
     });
 }
@@ -165,6 +191,7 @@ function showDashboard() {
 function openFamilyPanel() {
 
     closeAllPanels();
+
 
     document
         .getElementById("family-panel")
@@ -209,19 +236,28 @@ function hideContactForm() {
 function saveEmergencyContact() {
 
     let name =
-        document.getElementById("contact-name")
-            .value.trim();
+        document
+            .getElementById("contact-name")
+            .value
+            .trim();
+
 
     let phone =
-        document.getElementById("contact-phone")
-            .value.trim();
+        document
+            .getElementById("contact-phone")
+            .value
+            .trim();
+
 
     let relation =
-        document.getElementById("contact-relation")
+        document
+            .getElementById(
+                "contact-relation"
+            )
             .value;
 
 
-    // Check empty fields
+    // Empty field check
     if (
         name === "" ||
         phone === "" ||
@@ -230,44 +266,23 @@ function saveEmergencyContact() {
 
         if (hindiMode) {
 
-            alert("कृपया सभी जानकारी भरें।");
+            alert(
+                "कृपया सभी जानकारी भरें।"
+            );
 
         } else {
 
-            alert("Please fill all contact details.");
+            alert(
+                "Please fill all contact details."
+            );
         }
 
         return;
     }
 
 
-    /*
-       IMPORTANT:
-
-       LocalStorage use nahi kar rahe.
-
-       Tanishka ki POST Emergency Contact API
-       yahan connect hogi.
-
-       Future:
-
-       fetch("TANISHKA_API_URL", {
-           method: "POST",
-
-           headers: {
-               "Content-Type": "application/json"
-           },
-
-           body: JSON.stringify({
-               userId: ...,
-               name: name,
-               phone: phone,
-               relation: relation
-           })
-       })
-
-    */
-
+    // Backend API integration
+    // Isko baad me connect karenge
 
     if (hindiMode) {
 
@@ -304,9 +319,7 @@ function openLocationPanel() {
         .classList.add("panel-open");
 
 
-    // Hidden panel se map open hone par
-    // Leaflet ko correct size batana hota hai.
-
+    // Leaflet map resize
     setTimeout(function () {
 
         if (map) {
@@ -334,7 +347,9 @@ function closeLocationPanel() {
 function getCurrentLocation() {
 
     let status =
-        document.getElementById("location-status");
+        document.getElementById(
+            "location-status"
+        );
 
 
     // Browser geolocation support check
@@ -375,6 +390,7 @@ function getCurrentLocation() {
             let latitude =
                 position.coords.latitude;
 
+
             let longitude =
                 position.coords.longitude;
 
@@ -403,13 +419,19 @@ function getCurrentLocation() {
             }
 
 
-            // Emergency center ka status bhi update
-            document.getElementById(
-                "emergency-location-status"
-            ).innerText =
-                hindiMode
-                    ? "स्थान उपलब्ध है"
-                    : "Location available";
+            let emergencyLocationStatus =
+                document.getElementById(
+                    "emergency-location-status"
+                );
+
+
+            if (emergencyLocationStatus) {
+
+                emergencyLocationStatus.innerText =
+                    hindiMode
+                        ? "स्थान उपलब्ध है"
+                        : "Location available";
+            }
 
 
             showLocationOnMap(
@@ -450,6 +472,16 @@ function getCurrentLocation() {
                         ? "स्थान प्राप्त नहीं हो सका।"
                         : "Unable to get location.";
             }
+        },
+
+
+        // LOCATION SETTINGS
+        {
+            enableHighAccuracy: true,
+
+            timeout: 5000,
+
+            maximumAge: 0
         }
     );
 }
@@ -460,43 +492,58 @@ function getCurrentLocation() {
 // 11. SHOW LOCATION ON MAP
 // ==========================================
 
-function showLocationOnMap(latitude, longitude) {
+function showLocationOnMap(
+    latitude,
+    longitude
+) {
 
-    // First time map create hoga
+    // First time map create
     if (!map) {
 
         map =
             L.map("map").setView(
-                [latitude, longitude],
+                [
+                    latitude,
+                    longitude
+                ],
                 16
             );
 
 
-        // OpenStreetMap tiles
         L.tileLayer(
+
             "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+
             {
+
                 maxZoom: 19,
 
                 attribution:
                     "&copy; OpenStreetMap contributors"
             }
+
         ).addTo(map);
     }
 
 
-    // Marker already hai
+    // Existing marker
     if (locationMarker) {
 
         locationMarker.setLatLng(
-            [latitude, longitude]
+            [
+                latitude,
+                longitude
+            ]
         );
 
     } else {
 
         locationMarker =
             L.marker(
-                [latitude, longitude]
+                [
+                    latitude,
+                    longitude
+                ]
             ).addTo(map);
     }
 
@@ -511,7 +558,10 @@ function showLocationOnMap(latitude, longitude) {
 
 
     map.setView(
-        [latitude, longitude],
+        [
+            latitude,
+            longitude
+        ],
         16
     );
 
@@ -532,6 +582,7 @@ function showLocationOnMap(latitude, longitude) {
 function openAlertsPanel() {
 
     closeAllPanels();
+
 
     document
         .getElementById("alerts-panel")
@@ -554,30 +605,71 @@ function closeAlertsPanel() {
 
 function loadSOSHistory() {
 
-    /*
-       Tanishka ki GET SOS History API
-       yahan connect hogi.
-
-       MongoDB ke actual records
-       yahan se load honge.
-
-       Fake localStorage history
-       use nahi kar rahe.
-    */
+    console.log(
+        "Loading SOS history for:",
+        currentUserEmail
+    );
 
 
-    if (hindiMode) {
+    fetch(
+        "/api/emergency/sos/" +
+        encodeURIComponent(
+            currentUserEmail
+        )
+    )
 
-        alert(
-            "SOS History backend API से connect की जाएगी।"
+    .then(function (response) {
+
+        console.log(
+            "History HTTP Status:",
+            response.status
         );
 
-    } else {
+
+        return response.json();
+    })
+
+
+    .then(function (data) {
+
+        console.log(
+            "SOS History Response:",
+            data
+        );
+
+
+        if (data.success) {
+
+            console.log(
+                "Emergencies:",
+                data.emergencies
+            );
+
+        } else {
+
+            alert(
+                hindiMode
+                    ? "SOS इतिहास लोड नहीं हो सका।"
+                    : "Could not load SOS history."
+            );
+        }
+    })
+
+
+    .catch(function (error) {
+
+        console.log(
+            "SOS History API Error:",
+            error
+        );
+
 
         alert(
-            "SOS History will be connected to the backend API."
+            hindiMode
+                ? "सर्वर से कनेक्ट नहीं हो सका।"
+                : "Could not connect to server."
         );
-    }
+    });
 }
 
 
@@ -589,6 +681,7 @@ function loadSOSHistory() {
 function openEmergencyPanel() {
 
     closeAllPanels();
+
 
     document
         .getElementById("emergency-panel")
@@ -604,26 +697,51 @@ function closeEmergencyPanel() {
 }
 
 
+
 // ==========================================
-// DIGITAL TWIN PANEL
+// 15. DIGITAL TWIN
 // ==========================================
+
+// Agar Digital Twin HTML me present hai
+// to ye functions kaam karenge.
+// Agar use nahi karna hai to ignore kar sakte ho.
 
 function openDigitalTwinPanel() {
 
     closeAllPanels();
 
-    document
-        .getElementById("digital-twin-panel")
-        .classList.add("panel-open");
+
+    let panel =
+        document.getElementById(
+            "digital-twin-panel"
+        );
+
+
+    if (panel) {
+
+        panel.classList.add(
+            "panel-open"
+        );
+    }
 }
 
 
 function closeDigitalTwinPanel() {
 
-    document
-        .getElementById("digital-twin-panel")
-        .classList.remove("panel-open");
+    let panel =
+        document.getElementById(
+            "digital-twin-panel"
+        );
+
+
+    if (panel) {
+
+        panel.classList.remove(
+            "panel-open"
+        );
+    }
 }
+
 
 
 // ==========================================
@@ -635,10 +753,11 @@ let audioContext = null;
 let alarmInterval = null;
 
 
-// Ek short warning beep
+// Short warning beep
 function createAlarmBeep() {
 
     if (!audioContext) {
+
         return;
     }
 
@@ -646,11 +765,11 @@ function createAlarmBeep() {
     let oscillator =
         audioContext.createOscillator();
 
+
     let gain =
         audioContext.createGain();
 
 
-    // Normal electronic alarm tone
     oscillator.type = "sine";
 
 
@@ -680,10 +799,14 @@ function createAlarmBeep() {
 
     oscillator.connect(gain);
 
-    gain.connect(audioContext.destination);
+
+    gain.connect(
+        audioContext.destination
+    );
 
 
     oscillator.start();
+
 
     oscillator.stop(
         audioContext.currentTime + 0.35
@@ -723,7 +846,10 @@ function stopAlarmSound() {
 
     if (alarmInterval) {
 
-        clearInterval(alarmInterval);
+        clearInterval(
+            alarmInterval
+        );
+
 
         alarmInterval = null;
     }
@@ -732,6 +858,7 @@ function stopAlarmSound() {
     if (audioContext) {
 
         audioContext.close();
+
 
         audioContext = null;
     }
@@ -750,12 +877,10 @@ let emergencySeconds = 10;
 let currentEmergencyType = "";
 
 
-
 function sendSOS() {
 
     startEmergency("sos");
 }
-
 
 
 function simulateFall() {
@@ -773,6 +898,7 @@ function startEmergency(type) {
 
     currentEmergencyType = type;
 
+
     emergencySeconds = 10;
 
 
@@ -781,10 +907,12 @@ function startEmergency(type) {
             "emergency-popup"
         );
 
+
     let title =
         document.getElementById(
             "emergency-title"
         );
+
 
     let countdown =
         document.getElementById(
@@ -792,7 +920,7 @@ function startEmergency(type) {
         );
 
 
-    // Correct title
+    // Title set
     if (type === "fall") {
 
         title.innerText =
@@ -814,17 +942,20 @@ function startEmergency(type) {
 
 
     // Popup show
-    popup.style.display = "flex";
+    popup.style.display =
+        "flex";
 
 
     // Alarm start
     playAlarmSound();
 
 
-    // Agar old timer chal raha ho
+    // Old timer stop
     if (countdownInterval) {
 
-        clearInterval(countdownInterval);
+        clearInterval(
+            countdownInterval
+        );
     }
 
 
@@ -838,18 +969,21 @@ function startEmergency(type) {
                 emergencySeconds;
 
 
-            // 10 seconds complete
             if (emergencySeconds <= 0) {
 
                 clearInterval(
                     countdownInterval
                 );
 
-                countdownInterval = null;
+
+                countdownInterval =
+                    null;
 
 
-                // Automatically emergency escalate
-                callEmergencyContacts(true);
+                // Automatic emergency
+                callEmergencyContacts(
+                    true
+                );
             }
 
         }, 1000);
@@ -869,7 +1003,9 @@ function userIsOkay() {
             countdownInterval
         );
 
-        countdownInterval = null;
+
+        countdownInterval =
+            null;
     }
 
 
@@ -878,7 +1014,8 @@ function userIsOkay() {
 
     document.getElementById(
         "emergency-popup"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
 
     if (hindiMode) {
@@ -901,7 +1038,9 @@ function userIsOkay() {
 // 20. CALL EMERGENCY CONTACTS
 // ==========================================
 
-function callEmergencyContacts(automatic = false) {
+function callEmergencyContacts(
+    automatic = false
+) {
 
     // Timer stop
     if (countdownInterval) {
@@ -910,7 +1049,9 @@ function callEmergencyContacts(automatic = false) {
             countdownInterval
         );
 
-        countdownInterval = null;
+
+        countdownInterval =
+            null;
     }
 
 
@@ -921,20 +1062,11 @@ function callEmergencyContacts(automatic = false) {
     // Popup close
     document.getElementById(
         "emergency-popup"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
 
-    /*
-       Ab current location lene ki koshish karenge.
-
-       Location mil gayi:
-       Backend ko latitude + longitude bhejenge.
-
-       Location nahi mili:
-       Emergency fir bhi backend ko bhejni hai.
-    */
-
-
+    // Geolocation unavailable
     if (!navigator.geolocation) {
 
         sendEmergencyToBackend(
@@ -943,16 +1075,19 @@ function callEmergencyContacts(automatic = false) {
             automatic
         );
 
+
         return;
     }
 
 
     navigator.geolocation.getCurrentPosition(
 
+        // LOCATION SUCCESS
         function (position) {
 
             let latitude =
                 position.coords.latitude;
+
 
             let longitude =
                 position.coords.longitude;
@@ -966,10 +1101,8 @@ function callEmergencyContacts(automatic = false) {
         },
 
 
+        // LOCATION FAILED
         function () {
-
-            // Location fail hui,
-            // emergency cancel nahi hogi.
 
             sendEmergencyToBackend(
                 null,
@@ -979,6 +1112,7 @@ function callEmergencyContacts(automatic = false) {
         },
 
 
+        // SETTINGS
         {
             enableHighAccuracy: true,
 
@@ -986,6 +1120,7 @@ function callEmergencyContacts(automatic = false) {
 
             maximumAge: 0
         }
+
     );
 }
 
@@ -1001,69 +1136,32 @@ function sendEmergencyToBackend(
     automatic
 ) {
 
-    /*
-       YAHAN TANISHKA KI SOS POST API AAYEGI.
-
-       Example future data:
-
-       {
-           userId: ...,
-
-           location: {
-               latitude: latitude,
-               longitude: longitude
-           },
-
-           emergencyMessage:
-               currentEmergencyType === "fall"
-               ? "Fall Detected"
-               : "SOS Activated"
-       }
+    let emergencyMessage = "";
 
 
-       IMPORTANT:
+    if (
+        currentEmergencyType ===
+        "fall"
+    ) {
 
-       Actual endpoint aur exact field names
-       Tanishka se lene ke baad hi fetch()
-       add karenge.
-    */
-
-
-    if (automatic) {
-
-        if (hindiMode) {
-
-            alert(
-                "10 सेकंड में कोई प्रतिक्रिया नहीं मिली।\n\nआपातकाल स्वचालित रूप से आगे बढ़ाया गया।"
-            );
-
-        } else {
-
-            alert(
-                "No response received within 10 seconds.\n\nEmergency automatically escalated."
-            );
-        }
+        emergencyMessage =
+            "Fall Detected";
 
     } else {
 
-        if (hindiMode) {
-
-            alert(
-                "आपातकालीन अनुरोध शुरू किया गया।"
-            );
-
-        } else {
-
-            alert(
-                "Emergency request initiated."
-            );
-        }
+        emergencyMessage =
+            "SOS Activated";
     }
 
 
     console.log(
-        "Emergency Type:",
-        currentEmergencyType
+        "Sending emergency to backend..."
+    );
+
+
+    console.log(
+        "User:",
+        currentUserEmail
     );
 
 
@@ -1080,15 +1178,119 @@ function sendEmergencyToBackend(
 
 
     console.log(
-        "Automatic:",
-        automatic
+        "Message:",
+        emergencyMessage
     );
+
+
+    fetch(
+        "/api/emergency/sos",
+
+        {
+
+            method: "POST",
+
+
+            headers: {
+
+                "Content-Type":
+                    "application/json"
+            },
+
+
+            body: JSON.stringify({
+
+                userId:
+                    currentUserEmail,
+
+
+                location: {
+
+                    latitude:
+                        latitude,
+
+                    longitude:
+                        longitude
+                },
+
+
+                message:
+                    emergencyMessage
+            })
+        }
+    )
+
+
+    .then(function (response) {
+
+        console.log(
+            "HTTP Status:",
+            response.status
+        );
+
+
+        return response.json();
+    })
+
+
+    .then(function (data) {
+
+        console.log(
+            "Backend Response:",
+            data
+        );
+
+
+        if (data.success) {
+
+            if (automatic) {
+
+                alert(
+                    hindiMode
+                        ? "10 सेकंड में कोई प्रतिक्रिया नहीं मिली। आपातकाल सफलतापूर्वक भेज दिया गया।"
+                        : "No response received within 10 seconds. Emergency sent successfully."
+                );
+
+            } else {
+
+                alert(
+                    hindiMode
+                        ? "आपातकाल सफलतापूर्वक भेज दिया गया।"
+                        : "Emergency sent successfully."
+                );
+            }
+
+        } else {
+
+            alert(
+                hindiMode
+                    ? "आपातकाल भेजने में समस्या हुई।"
+                    : "Failed to send emergency."
+            );
+        }
+    })
+
+
+    .catch(function (error) {
+
+        console.log(
+            "Emergency API Error:",
+            error
+        );
+
+
+        alert(
+            hindiMode
+                ? "सर्वर से कनेक्ट नहीं हो सका।"
+                : "Could not connect to server."
+        );
+    });
 }
 
 
 
 // ==========================================
-// 22. SAATHI AI CHATBOT
+// 22. SAATHI AI CHATBOT OPEN / CLOSE
 // ==========================================
 
 function openChatbot() {
@@ -1096,18 +1298,34 @@ function openChatbot() {
     closeAllPanels();
 
 
-    document.getElementById(
-        "chatbot-container"
-    ).style.display = "flex";
+    let chatbot =
+        document.getElementById(
+            "chatbot-container"
+        );
+
+
+    if (chatbot) {
+
+        chatbot.style.display =
+            "flex";
+    }
 }
 
 
 
 function closeChatbot() {
 
-    document.getElementById(
-        "chatbot-container"
-    ).style.display = "none";
+    let chatbot =
+        document.getElementById(
+            "chatbot-container"
+        );
+
+
+    if (chatbot) {
+
+        chatbot.style.display =
+            "none";
+    }
 }
 
 
@@ -1120,7 +1338,16 @@ function toggleChatbot() {
         );
 
 
-    if (chatbot.style.display === "flex") {
+    if (!chatbot) {
+
+        return;
+    }
+
+
+    if (
+        chatbot.style.display ===
+        "flex"
+    ) {
 
         closeChatbot();
 
@@ -1133,69 +1360,222 @@ function toggleChatbot() {
 
 
 // ==========================================
-// 23. SEND CHAT MESSAGE
+// 23. SEND MESSAGE TO SURBHI CHATBOT
 // ==========================================
 
-function sendChatMessage() {
+async function sendChatMessage() {
 
+    // Input box
     let input =
         document.getElementById(
             "chat-input"
         );
 
-    let message =
-        input.value.trim();
+
+    // Chat area
+    let chatMessages =
+        document.getElementById(
+            "chat-messages"
+        );
 
 
-    if (message === "") {
+    // Input safety check
+    if (!input || !chatMessages) {
+
+        console.log(
+            "Chat elements not found."
+        );
+
+
         return;
     }
 
 
-    addUserMessage(message);
+    // User message
+    let message =
+        input.value.trim();
+
+
+    // Empty message
+    if (message === "") {
+
+        return;
+    }
+
+
+    // User message screen par show
+    addUserMessage(
+        message
+    );
 
 
     // Input clear
     input.value = "";
 
 
-    /*
-       Gemini API ko frontend se directly
-       call nahi karenge.
+    // ======================================
+    // LOADING MESSAGE
+    // ======================================
 
-       Future flow:
-
-       Frontend
-          ↓
-       Tanishka Backend
-          ↓
-       Gemini API
-          ↓
-       Backend
-          ↓
-       Frontend
-
-       Isse API key frontend me expose
-       nahi hogi.
-    */
+    let loadingMessage =
+        document.createElement(
+            "div"
+        );
 
 
-    setTimeout(function () {
+    loadingMessage.className =
+        "bot-message";
 
-        if (hindiMode) {
+
+    let loadingAvatar =
+        document.createElement(
+            "div"
+        );
+
+
+    loadingAvatar.className =
+        "message-avatar";
+
+
+    loadingAvatar.innerText =
+        "🤖";
+
+
+    let loadingBubble =
+        document.createElement(
+            "div"
+        );
+
+
+    loadingBubble.className =
+        "message-bubble";
+
+
+    let loadingText =
+        document.createElement(
+            "p"
+        );
+
+
+    loadingText.innerText =
+        hindiMode
+            ? "साथी सोच रहा है..."
+            : "Saathi is thinking...";
+
+
+    loadingBubble.appendChild(
+        loadingText
+    );
+
+
+    loadingMessage.appendChild(
+        loadingAvatar
+    );
+
+
+    loadingMessage.appendChild(
+        loadingBubble
+    );
+
+
+    chatMessages.appendChild(
+        loadingMessage
+    );
+
+
+    scrollChatToBottom();
+
+
+    // ======================================
+    // SURBHI PYTHON CHATBOT API
+    // ======================================
+
+    try {
+
+        let response =
+            await fetch(
+
+                "http://127.0.0.1:8000/chat",
+
+                {
+
+                    method: "POST",
+
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+                    },
+
+
+                    body: JSON.stringify({
+
+                        message:
+                            message
+                    })
+                }
+            );
+
+
+        // HTTP error check
+        if (!response.ok) {
+
+            throw new Error(
+                "Chatbot server returned status " +
+                response.status
+            );
+        }
+
+
+        // JSON response
+        let data =
+            await response.json();
+
+
+        // Loading remove
+        loadingMessage.remove();
+
+
+        // API response check
+        if (data.reply) {
 
             addBotMessage(
-                "मैं अभी डेमो मोड में हूँ। Gemini AI इंटीग्रेशन जल्द जोड़ा जाएगा।"
+                data.reply
             );
 
         } else {
 
             addBotMessage(
-                "I'm currently in demo mode. Gemini AI integration will be added through the backend."
+                hindiMode
+                    ? "मुझे उत्तर प्राप्त नहीं हुआ।"
+                    : "I could not get a response."
             );
         }
 
-    }, 500);
+    }
+
+
+    catch (error) {
+
+        console.log(
+            "Chatbot API Error:",
+            error
+        );
+
+
+        // Loading remove
+        loadingMessage.remove();
+
+
+        addBotMessage(
+
+            hindiMode
+                ? "साथी AI से कनेक्ट नहीं हो सका।"
+                : "Sorry, Saathi AI is currently unavailable."
+
+        );
+    }
 }
 
 
@@ -1213,7 +1593,9 @@ function addUserMessage(message) {
 
 
     let messageDiv =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     messageDiv.className =
@@ -1221,7 +1603,9 @@ function addUserMessage(message) {
 
 
     let bubble =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     bubble.className =
@@ -1229,18 +1613,30 @@ function addUserMessage(message) {
 
 
     let text =
-        document.createElement("p");
+        document.createElement(
+            "p"
+        );
 
 
+    // innerText use kar rahe hain
+    // taaki user HTML execute na kar sake
     text.innerText =
         message;
 
 
-    bubble.appendChild(text);
+    bubble.appendChild(
+        text
+    );
 
-    messageDiv.appendChild(bubble);
 
-    chatMessages.appendChild(messageDiv);
+    messageDiv.appendChild(
+        bubble
+    );
+
+
+    chatMessages.appendChild(
+        messageDiv
+    );
 
 
     scrollChatToBottom();
@@ -1261,7 +1657,9 @@ function addBotMessage(message) {
 
 
     let messageDiv =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     messageDiv.className =
@@ -1269,18 +1667,23 @@ function addBotMessage(message) {
 
 
     let avatar =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     avatar.className =
         "message-avatar";
+
 
     avatar.innerText =
         "🤖";
 
 
     let bubble =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     bubble.className =
@@ -1288,20 +1691,33 @@ function addBotMessage(message) {
 
 
     let text =
-        document.createElement("p");
+        document.createElement(
+            "p"
+        );
 
 
     text.innerText =
         message;
 
 
-    bubble.appendChild(text);
+    bubble.appendChild(
+        text
+    );
 
-    messageDiv.appendChild(avatar);
 
-    messageDiv.appendChild(bubble);
+    messageDiv.appendChild(
+        avatar
+    );
 
-    chatMessages.appendChild(messageDiv);
+
+    messageDiv.appendChild(
+        bubble
+    );
+
+
+    chatMessages.appendChild(
+        messageDiv
+    );
 
 
     scrollChatToBottom();
@@ -1316,6 +1732,9 @@ function addBotMessage(message) {
 function handleChatEnter(event) {
 
     if (event.key === "Enter") {
+
+        event.preventDefault();
+
 
         sendChatMessage();
     }
@@ -1335,6 +1754,9 @@ function scrollChatToBottom() {
         );
 
 
-    chatMessages.scrollTop =
-        chatMessages.scrollHeight;
+    if (chatMessages) {
+
+        chatMessages.scrollTop =
+            chatMessages.scrollHeight;
+    }
 }

@@ -6,8 +6,12 @@ const emergencySchema = new mongoose.Schema({
         required: true
     },
     location: {
-        type: String,
-        required: true
+        latitude:{
+            type: Number
+        },
+        longitude: {
+            type: Number
+        }
     },
     message: {
         type: String
