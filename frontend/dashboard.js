@@ -1015,186 +1015,64 @@ function sendEmergencyToBackend(
 // CHATBOT
 // ==============================
 
+
+
+// Streamlit chatbot URL
+const CHATBOT_URL = "http://localhost:8509";
+
+
+// Sidebar AI Assistant se chatbot open
 function openChatbot() {
 
-    closeAllPanels();
-
-    document.getElementById(
-        "chatbot-container"
-    ).style.display =
-        "flex";
+    window.open(
+        CHATBOT_URL,
+        "_blank"
+    );
 }
 
-function closeChatbot() {
 
-    document.getElementById(
-        "chatbot-container"
-    ).style.display =
-        "none";
-}
-
+// Floating AI button se chatbot open
 function toggleChatbot() {
+
+    window.open(
+        CHATBOT_URL,
+        "_blank"
+    );
+}
+
+
+// Purane close button ke liye
+function closeChatbot() {
 
     let chatbot =
         document.getElementById(
             "chatbot-container"
         );
 
-    if (
-        chatbot.style.display === "flex"
-    ) {
-        closeChatbot();
-    } else {
-        openChatbot();
+    if (chatbot) {
+        chatbot.style.display = "none";
     }
 }
 
+
+// Agar purane input ka send button click ho
 function sendChatMessage() {
 
-    let input =
-        document.getElementById(
-            "chat-input"
-        );
-
-    let message =
-        input.value.trim();
-
-    if (message === "") {
-        return;
-    }
-
-    addUserMessage(message);
-
-    input.value = "";
-
-    setTimeout(function () {
-
-        addBotMessage(
-            hindiMode
-                ? "मैं अभी डेमो मोड में हूँ। Gemini इंटीग्रेशन बैकएंड से किया जाएगा।"
-                : "I'm currently in demo mode. Gemini will be connected through the backend."
-        );
-
-    }, 500);
+    window.open(
+        CHATBOT_URL,
+        "_blank"
+    );
 }
 
-function addUserMessage(message) {
 
-    let chatMessages =
-        document.getElementById(
-            "chat-messages"
-        );
-
-    let messageDiv =
-        document.createElement(
-            "div"
-        );
-
-    messageDiv.className =
-        "user-message";
-
-    let bubble =
-        document.createElement(
-            "div"
-        );
-
-    bubble.className =
-        "message-bubble";
-
-    let text =
-        document.createElement(
-            "p"
-        );
-
-    text.innerText =
-        message;
-
-    bubble.appendChild(text);
-
-    messageDiv.appendChild(bubble);
-
-    chatMessages.appendChild(
-        messageDiv
-    );
-
-    scrollChatToBottom();
-}
-
-function addBotMessage(message) {
-
-    let chatMessages =
-        document.getElementById(
-            "chat-messages"
-        );
-
-    let messageDiv =
-        document.createElement(
-            "div"
-        );
-
-    messageDiv.className =
-        "bot-message";
-
-    let avatar =
-        document.createElement(
-            "div"
-        );
-
-    avatar.className =
-        "message-avatar";
-
-    avatar.innerText =
-        "🤖";
-
-    let bubble =
-        document.createElement(
-            "div"
-        );
-
-    bubble.className =
-        "message-bubble";
-
-    let text =
-        document.createElement(
-            "p"
-        );
-
-    text.innerText =
-        message;
-
-    bubble.appendChild(
-        text
-    );
-
-    messageDiv.appendChild(
-        avatar
-    );
-
-    messageDiv.appendChild(
-        bubble
-    );
-
-    chatMessages.appendChild(
-        messageDiv
-    );
-
-    scrollChatToBottom();
-}
-
+// Enter press par chatbot open
 function handleChatEnter(event) {
 
     if (event.key === "Enter") {
-        sendChatMessage();
-    }
-}
 
-function scrollChatToBottom() {
-
-    let chatMessages =
-        document.getElementById(
-            "chat-messages"
+        window.open(
+            CHATBOT_URL,
+            "_blank"
         );
-
-    chatMessages.scrollTop =
-        chatMessages.scrollHeight;
+    }
 }
