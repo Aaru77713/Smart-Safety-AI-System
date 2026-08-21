@@ -2774,3 +2774,40 @@ body.light-mode
         right: 12px;
     }
 }
+.nearby-section {
+    margin-top: 15px;
+}
+
+.nearby-section h3 {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+#nearby-services {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nearby-card {
+    padding: 13px;
+
+    background: #1d1d26;
+
+    border: 1px solid #30303a;
+    border-radius: 12px;
+}
+
+.nearby-card h4 {
+    margin-bottom: 5px;
+}
+
+.nearby-card p {
+    color: #888;
+    font-size: 12px;
+}
+
+body.light-mode .nearby-card {
+    background: #f7f7fa;
+    border-color: #dfdfe6;
+}
